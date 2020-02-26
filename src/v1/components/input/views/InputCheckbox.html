@@ -1,0 +1,14 @@
+{{#if form_title != null}}
+<h3 class="ui dividing header">{{form_title}}</h3>
+{{else}}
+<div class="ui divider"></div>
+{{/if}}
+<div class="field">
+<div class="ui checkbox {{class}}" id="{{id}}">
+    <input type="checkbox" {{custom_name_text}} tabindex="0" class="hidden" />
+    <label>{{label}}</label>
+</div>
+<div class="base_wr row">
+    <span class="base_info error bold small"></span>
+</div>
+</div>

@@ -1,0 +1,53 @@
+<div id="users" class="base_wr column" data-state={{update_state}} style="position: relative;">
+    <filter-bar on-filterButtonClickListener="observeFilterButtonClickListener"></filter-bar>
+    <!-- <right-btn on-filterButtonClickListener="observeFilterButtonClickListener"></right-btn> -->
+    <table class="ui striped table">
+      <thead>
+        <tr>
+          <th>{{@global.gettext("No")}}</th>
+          <th>{{@global.gettext("Nom du droit d'accès")}}</th>
+          <th>{{@global.gettext("Description")}}</th>
+          <th>{{@global.gettext("Dernière modification")}}</th>
+          <th>{{@global.gettext("Option")}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each datas:i}}
+        <tr>
+          <td>{{i+1}}</td>
+          <td></td>
+          <td></td>
+          <td>{{@global.moment(updated_at,'YYYY-MM-DD HH:mm:ss').format('LL')}}</td>
+          <td>
+            <div class="list-menu-click" style="position: relative;">
+              <i class="ion ion-md-create"></i>
+            </div>
+            <div id="popup" class="ui fluid popup bottom left transition hidden" style="">
+              <div class="ui four column relaxed divided grid">
+                <div class="column">
+                  <div class="ui link list">
+                    <a class="item nowrap" href="{{@this.setUrl(@global.HTTP_REQUEST.PRODUCT.VIEW,[{':id':id}])}}">{{gettext("Éditer")}}</a>
+                    <a class="item nowrap" href="#" on-click="@this.handleClick('DELETE_ITEM',{id : id},@event)">{{gettext("Supprimer")}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{#if pagination_numbers.length > 0}}
+    <div>
+      <div class="ui pagination menu" id="pag-data">
+        {{#each (pagination_numbers):i}}
+        {{#if pagination_numbers[0] != 1 && i == 0}}
+        <a class="item" data-value="1" on-click="@this.handleClick('PAGINATION',{page : 1, is_first : true, is_last : false},@event)">1</a>
+        <div class="disabled item">...</div>
+        {{/if}}
+        <a class="item" data-value="{{pagination_numbers[i}}]" on-click="@this.handleClick('PAGINATION',{page : pagination_numbers[i], is_first : i==0, is_last : i==pagination_numbers.length-1},@event)">{{pagination_numbers[i}}]</a>
+        {{/each}}
+      </div>
+    </div>  
+    {{/if}}
+  </div>

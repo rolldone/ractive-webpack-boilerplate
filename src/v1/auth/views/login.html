@@ -1,0 +1,40 @@
+<div class="ui middle aligned center aligned grid base_container" id="auth">
+	<div class="column">
+		<img src="/public/img/logo.png" alt="">
+		<h1 class="ui image header">
+				{{@global.gettext("Connectez-vous à votre compte")}}
+		</h1>
+		{{#if notification != ''}}
+		<div class="base_wr column notification">
+			<h5>{{notification}}</h5>
+		</div>
+		{{/if}}
+		<form action="{{@global.HTTP_REQUEST.AUTH_XHR.LOGIN}}" id="form-login" method="get" class="ui large form">
+			<div class="ui stacked secondary  segment">
+				<div class="field">
+					<div class="ui left icon input">
+						<i class="user icon"></i>
+						<input type="text" name="user_email" placeholder="{{ @global.gettext('Email')}}">
+					</div>
+					<div class="base_wr row">
+						<span class="base_info error bold small"></span>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui left icon input">
+						<i class="lock icon"></i>
+						<input type="password" name="user_password" placeholder="{{ @global.gettext('Mot de passe')}}">
+					</div>
+					<div class="base_wr row">
+						<span class="base_info error bold small"></span>
+					</div>
+				</div>
+				<button class="ui fluid large teal submit button" on-click="@this.handleClick('SUBMIT',{},@event)">{{@global.gettext("S'identifier")}}</button>
+			</div>
+			<div class="ui error message"></div>
+		</form>
+		<div class="ui message">
+			{{@global.gettext("Nouveau pour nous?")}} <route-link href="/auth/register">{{@global.gettext("S'inscrire")}}</route-link>
+		</div>
+	</div>
+</div>

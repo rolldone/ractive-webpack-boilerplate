@@ -1,0 +1,162 @@
+<div class="base_wr column sidemenu" id="side-menu">
+    <div style="text-align: center; padding-top: 10px; padding-bottom: 10px;">
+      <img src="/public/img/logo-cuisine.png" alt="" style="width: 128px;">
+    </div>
+    <ul class="base_list menu">
+      <li class="mobile only">
+        <h3 class="base_wr row item">
+          {{@global.gettext("La cuisine de demain - Administration")}}
+        </h3>
+      </li>
+      {{#if @global.hasPermission('subscribe.subscribes')}}
+      <li>
+        <a class="base_wr row item has_submenu" href="#">
+          <i data-feather="user"></i>
+          <span class="base_info medium bold">{{@global.gettext("Souscrire")}}</span>
+          <i class="icon angle right"></i>
+        </a>
+        <ul class="base_list submenu">
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.subscribe.subscribes')}}">
+              <span class="base_info medium bold">{{@global.gettext("Liste d'abonnement")}}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      {{/if}}
+      <li>
+        <a class="base_wr row item has_submenu" href="#">
+          <i data-feather="user"></i>
+          <span class="base_info medium bold">{{@global.gettext("Utilisateurs")}}</span>
+          <i class="icon angle right"></i>
+        </a>
+        <ul class="base_list submenu">
+          {{#if @global.hasPermission('user.self')}}
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.user.profile')}}">
+              <span class="base_info medium bold">{{@global.gettext("Mise à jour des données utilisateur")}}</span>
+            </a>
+          </li>
+          {{/if}}
+          {{#if @global.hasPermission('user.self.friend.update')}}
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.user.users')}}">
+              <span class="base_info medium bold">{{@global.gettext("Utilisateurs")}}</span>
+            </a>
+          </li>
+          {{/if}}
+          {{#if @global.hasPermission('user.users')}}
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.user.users')}}">
+              <span class="base_info medium bold">{{@global.gettext("Utilisateurs")}}</span>
+            </a>
+          </li>
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.user.new')}}">
+              <span class="base_info medium bold">{{@global.gettext("Créer un nouvel utilisateur")}}</span>
+            </a>
+          </li>
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.privilege.privileges')}}">
+              <span class="base_info medium bold">{{@global.gettext("Niveaux d'accès")}}</span>
+            </a>
+          </li>
+          {{/if}}
+        </ul>
+      </li>
+      <li>
+        <a class="base_wr row item has_submenu" href="#">
+          <i data-feather="home"></i>
+          <span class="base_info medium bold">{{@global.gettext("Cuisines")}}</span>
+          <i class="icon angle right"></i>
+        </a>
+        <ul class="base_list submenu">
+          {{#if @global.hasPermission('cuisine.self')}}
+          <li>
+            <a href="base_wr row item" href="{{@global.route('member.cuisine.self.view')}}">
+              <span class="base_info medium bold">{{ _i("Cuisine Indépendante") }}</span>
+            </a>
+          </li>
+          {{/if}}
+          {{#if @global.hasPermission('cuisine.cuisines')}}
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.cuisine.cuisines')}}">
+              <span class="base_info medium bold">{{@global.gettext("Liste des Cuisines")}}</span>
+            </a>
+          </li>
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.cuisiner.cuisiners')}}">
+              <span class="base_info medium bold">{{@global.gettext("Cuisiniers")}}</span>
+            </a>
+          </li>
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.cuisine.new')}}">
+              <span class="base_info medium bold">{{@global.gettext("Créer une cuisine")}}</span>
+            </a>
+          </li>
+          {{/if}}
+        </ul>
+      </li>
+      <li>
+        <a class="base_wr row item has_submenu" href="#">
+          <i data-feather="book-open"></i>
+          <span class="base_info medium bold">{{@global.gettext("Cartes")}}</span>
+          <i class="icon angle right"></i>
+        </a>
+        <ul class="base_list submenu">
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.menu.menus')}}">
+              <span class="base_info medium bold">{{@global.gettext("Liste des menus")}}</span>
+            </a>
+          </li>
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.menu.new')}}">
+              <span class="base_info medium bold">{{@global.gettext("Nouveau menu")}}</span>
+            </a>
+          </li>
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.product.products')}}">
+              <span class="base_info medium bold">{{@global.gettext("Liste des plats")}}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      {{#if @global.hasPermission('fournisseur.fournisseurs')}}
+      <li>
+        <a class="base_wr row item has_submenu" href="#">
+          <i data-feather="package"></i>
+          <span class="base_info medium bold">{{@global.gettext("Fournisseurs")}}</span>
+          <i class="icon angle right"></i>
+        </a>
+        <ul class="base_list submenu">
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.supplier.suppliers')}}">
+              <span class="base_info medium bold">{{@global.gettext("Liste des fournisseurs")}}</span>
+            </a>
+          </li>
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.supplier.new')}}">
+              <span class="base_info medium bold">{{@global.gettext("Créer un Fournisseur")}}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      {{/if}}
+      {{#if @global.hasPermission('bus_parameter.bus_parameters')}}
+      <li>
+        <a class="base_wr row item has_submenu" href="#">
+          <i data-feather="settings"></i>
+          <span class="base_info medium bold">{{@global.gettext("Rêglages")}}</span>
+          <i class="icon angle right"></i>
+        </a>
+        <ul class="base_list submenu">
+          <li>
+            <a class="base_wr row item" href="{{@global.route('member.product.bus_params')}}">
+              <span class="base_info medium bold">{{@global.gettext("Catégories")}}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      {{/if}}
+    </ul>
+  </div>

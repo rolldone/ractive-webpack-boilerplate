@@ -1,0 +1,21 @@
+{{#if form_title != null}}
+<h3 class="ui dividing header">{{form_title}}</h3>
+{{else}}
+<div class="ui divider"></div>
+{{/if}}
+<div class="field">
+<label>{{label}}</label>
+<div style="{{style}}" class="ui floating dropdown labeled search icon button time_zone {{class}}" id="{{id}}">
+    <input type="hidden" name="{{name}}">
+    <i class="dropdown icon"></i>
+    <div class="default text">--</div>
+    <div class="menu">
+    {{#_datas:i}}
+        <div class="item" data-key="{{key}}" data-value="{{id}}"  data-symbol="1">{{label}}</div>
+    {{/_datas}}
+    </div>
+</div>
+<div class="base_wr row">
+<span class="base_info error bold small"></span>
+</div>
+</div>

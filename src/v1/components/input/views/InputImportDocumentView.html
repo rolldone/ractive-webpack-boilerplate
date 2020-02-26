@@ -1,0 +1,18 @@
+{{#if form_title != null}}
+  <h3 class="ui dividing header">{{form_title}}</h3>
+  {{else}}
+  <div class="ui divider"></div>
+  {{/if}}
+  <div class="field com_import">   
+    <label for="">{{label}}</label>
+    <div class="ui left icon input import {{class}}" id="{{id}}">
+      <div class="button-import">
+        <input on-change="@this.handleChange()" id="click-import" type="file" placeholder='{{placeholder}}' name="{{name}}" value="{{value}}" disabled="{{disabled==true?'disabled':''}}">
+        <span id='button' class="btn btn-primary">Importer une image</span>
+        <p>Les formats PNG (recommandé), JPG sont autorisés. <br> (note : la taille idéale en pixels est de 2000/2000 environ)</p>
+      </div>
+    </div> 
+    <div class="base_wr row">
+      <span class="base_info error bold small"></span>
+    </div>
+  </div>

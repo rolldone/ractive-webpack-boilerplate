@@ -1,0 +1,64 @@
+<div class="ui middle aligned center aligned grid base_container" id="auth">
+	<div class="column">
+		<img src="/public/img/logo.png" alt="">
+		<h2 class="ui image header">
+			<div class="content">
+				{{@global.gettext("Enregistrer un nouveau compte")}} 
+			</div>
+		</h2>
+		<form action='{{@global.HTTP_REQUEST.AUTH_XHR.REGISTER}}' method="get" id="form-register" class="ui large form">
+			<div class="ui stacked secondary  segment">
+				<div class="field">
+					<div class="ui left icon input">
+						<i class="user icon"></i>
+						<input type="text" name="user_first_name" placeholder='{{@global.gettext("Prénom")}}'>
+					</div>
+					<div class="base_wr row">
+							<span class="base_info error bold small"></span>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui left icon input">
+						<i class="user icon"></i>
+							<input type="text" name="user_last_name" placeholder='{{@global.gettext("Nom de famille")}}'>
+					</div>
+					<div class="base_wr row">
+							<span class="base_info error bold small"></span>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui left icon input">
+						<i class="user icon"></i>
+						<input type="text" name="user_email" placeholder='{{@global.gettext("Email")}}'>
+					</div>
+					<div class="base_wr row">
+							<span class="base_info error bold small"></span>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui left icon input">
+						<i class="lock icon"></i>
+						<input type="password" name="user_password" placeholder='{{@global.gettext("Mot de passe")}}'>
+					</div>
+					<div class="base_wr row">
+							<span class="base_info error bold small"></span>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui left icon input">
+						<i class="lock icon"></i>
+						<input type="password" name="user_password_confirm" placeholder='{{@global.gettext("Confirmation mot de passe")}}'>
+					</div>
+					<div class="base_wr row">
+							<span class="base_info error bold small"></span>
+					</div>
+				</div>
+				<button class="ui fluid large teal submit button" on-click="@this.handleClick('SUBMIT',{},@event)">{{@global.gettext("S'inscrire")}}</button>
+			</div>
+			<div class="ui error message"></div>
+		</form>
+		<div class="ui message">
+			{{@global.gettext("Avoir un utilisateur?")}} <route-link href="/auth/login">{{@global.gettext("Retour connexion")}}</route-link>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+<div id="users" class="base_wr column">
+  <form class="base_wr column ui form" id="form-create">
+    <input-import label="{{ $placeholder }}" name="photo" placeholder='{{@global.gettext("Profil photo")}}'></input-import>
+    <input-text label="{{ $placeholder }}" form_title="{{title_form}}" name="nom" placeholder='{{@global.gettext("Nom")}}' type="text"></input-text>
+    <input-text label="{{ $placeholder }}" name="prenom" placeholder='{{@global.gettext("Prenom")}}' type="text"></input-text>
+    <input-text label="{{ $placeholder }}" form_title='{{@global.gettext("DÉTAILS")}}' name="email" placeholder='{{@global.gettext("Email")}}' type="email" disabled="{{is_email_disabled}}"></input-text>
+    <input-dropdown datas="{{privilege_datas}}" other_value_key="" dropdown_text="name" label='{{@global.gettext("Groupe privilège")}}' name="group_id" class="select-group_id" id="group_id"></input-dropdown>
+    <input-dropdown datas="{{status_datas}}" other_value_key="" dropdown_text="label" label='{{@global.gettext("Statut")}}' name="status" class="select-status" id="status"></input-dropdown>
+    <input-text label="{{ $placeholder }}" form_title="{{ @global.gettext("Saisir votre mot de passe") }}" name="password" placeholder="{{@global.gettext("Saisir votre mot de passe")}}" type="password"></input-text>
+    <input-text label="{{ $placeholder }}" name="password_confirm" placeholder="{{@global.gettext("Re-saisir votre mot de passe")}}" type="password"></input-text>
+    <!-- <p>{{gettext("Note")}} : --</p> -->
+    <p></p>
+    <div class="base_wr row btn">
+      <button class="ui primary button" on-click="@this.handleClick('SUBMIT',{},@event)">{{submit}}</button>
+      <button class="ui basic button" on-click="@this.handleClick('BACK',{},@event)">{{@global.gettext("ANNULER")}}</button>
+    </div>
+  </form>
+</div>

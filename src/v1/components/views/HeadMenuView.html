@@ -1,0 +1,32 @@
+<div class="ui menu" id="header-menu">
+	<div class="item burger-menu">
+		<a href="base_wr row " href="#">
+			<img src="/public/img/menu-icon.svg" alt="" on-click="@this.handleClick('OPEN_SIDE_MENU',{},@event)"/>
+		</a>
+	</div>
+	<div class="item">
+			<h5 class="base_info page_name">{{page_name}}</h5>
+	</div>
+	<div class="menus-header">
+		
+	</div>
+	<div class="main-title mobile hidden">
+		<h5 class="base_info page_name">{{@global.gettext("La cuisine de demain - Administration")}}</h5>
+	</div>
+	<div class="right item">
+		<a class="browse item" id="right-head-pop-menu">
+			<img src="/public/img/mie.jpg" alt="" on-click="@this.handleClick('RIGHT_USER_MENU',{},@event)"/>
+		</a>
+		<div class="ui fluid popup bottom right transition hidden" style="top: auto; left: auto; bottom: 69px; right: 7px;">
+			<div class="ui four column relaxed divided grid">
+				<div class="column">
+					<div class="ui link list">
+						<!-- <a class="item" href="{{ route('member.user.profile') }}">{{@global.gettext("Profil")}}</a>
+						<a class="item" href="{{ url('backend/settings') }}">{{@global.gettext("Réglages")}}</a> -->
+						<a class="item" href="/auth/logout">{{@global.gettext("Se déconnecter")}}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

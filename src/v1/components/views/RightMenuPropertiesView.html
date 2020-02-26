@@ -1,0 +1,12 @@
+<div class="base_wr column sidemenu" id="right-menu">
+	<ul class="base_list menu">
+		{{#each menuItem:i}}
+		<li>
+			<a class="base_wr row item" on-click="@this.handleClick('MENU_ITEM_CLICK',{action : action, index : i},@event)">
+				<img src="{{ asset('v3/admin/img/avatar.png') }}" alt="">
+				<span class="base_info medium bold">{{label}}</span>
+			</a>
+		</li>
+		{{/each}}
+	</ul>
+</div>

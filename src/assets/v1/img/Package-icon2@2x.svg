@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>Package-icon2@2x</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Package-icon2">
+            <rect id="Rectangle" fill="#F0F0F0" x="0" y="0" width="32" height="32" rx="4"></rect>
+            <g id="Group-6-Copy" transform="translate(6.000000, 6.000000)">
+                <g id="Group-5-Copy" fill="#607D8B">
+                    <rect id="Rectangle-Copy-6" x="0" y="0" width="20" height="19" rx="2"></rect>
+                </g>
+                <rect id="Rectangle" fill="#F0F0F0" x="3" y="4" width="14" height="4" rx="2"></rect>
+                <rect id="Rectangle" fill="#F0F0F0" x="14" y="13" width="3" height="3"></rect>
+                <rect id="Rectangle-Copy-10" fill="#F0F0F0" x="10" y="13" width="3" height="3"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

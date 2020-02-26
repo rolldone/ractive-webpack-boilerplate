@@ -1,0 +1,25 @@
+{{#if form_title != null}}
+<h3 class="ui dividing header">{{form_title}}</h3>
+{{else}}
+<div class="ui divider"></div>
+{{/if}}
+<div class="field">
+<label for="">{{label}}</label>
+<div class="ui left icon input">
+    <i class="user icon"></i> 
+    <div class="ui selection dropdown {{class}}" id="{{id}}">
+    <input type="hidden" name="{{name}}">
+    <i class="dropdown icon"></i>
+    <div class="default text">--</div>
+    <div class="menu">
+        <div class="item" data-key="" data-value=""  data-symbol="1">{{default_text==null?'--':default_text}}</div>
+        {{#_datas:i}}
+        <div class="item" data-key="{{key}}" data-value="{{datas[i].id}}"  data-symbol="1">{{label}}</div>
+        {{/_datas}}
+    </div>
+    </div>
+</div> 
+<div class="base_wr row">
+    <span class="base_info error bold small"></span>
+</div>
+</div>
