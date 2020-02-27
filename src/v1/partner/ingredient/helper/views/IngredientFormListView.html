@@ -1,0 +1,29 @@
+<div class="wr_form_list">
+	<table class="ui striped table">
+		<thead>
+			<tr>
+				<th>{{ @global.gettext("No") }}</th>
+				<th>{{ @global.gettext("Name") }}</th>
+				<th>{{ @global.gettext("Qty") }}</th>
+				<th>{{ @global.gettext("Unit of measure") }}</th>
+				<th>{{ @global.gettext("Option") }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each datas:i}}
+			<tr>
+				<td>{{i+1}}</td>
+				<td>{{nom_de_ingredient}}</td>
+				<td>{{qty}}</td>
+				<td>{{unite_de_mesure}}</td>
+				<td>
+					<div class="list-menu-click" style="position: relative;">
+                        <i class="ion ion-md-create" on-click="@this.handleClick('UPDATE',{index : i},@event)"></i>
+                        <i class="icon ion-ios-close-circle" on-click="@this.handleClick('DELETE',{index : i},@event)"></i>
+					</div>
+				</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>

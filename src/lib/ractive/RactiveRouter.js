@@ -100,6 +100,7 @@
 				if(_this.Handler() instanceof Promise){
 					_this.Handler().then(function(res){
 						_this.Handler = res;
+						console.log('ooooooooo',_this.Handler)
 						_this.Handler({ el: _this.router.el, data: data, uri: _this.router.uri , router : _this.router ,oncomplete : function(){
 							this._super();
 							asyncjs.series(_this.router.afterEachMiddleware,function(err,result){})
@@ -231,6 +232,7 @@
 	 * @public
 	 */
 	function Router(options) {
+		let self = this;
 		if(options.init != null){
 			/* 
 				Jangan Di idupin nanti rusak push historinya, 
@@ -249,6 +251,7 @@
 		this.stateWatcher = null;
 		this.route = null;
 		this.routes = [];
+		this.routeName = {};
 		this.uri = {};
     }
     
@@ -339,8 +342,17 @@
 	 * @public
 	 */
 	Router.prototype.start = function () {
+		let self = this;
 		asyncjs.series([this.onInit,this.onComplete],function(err,result){
-			
+			self.routeName = (function(router_store_list){
+				self.staticType(router_store_list,[Object]);
+				return function(whatROuteName){
+					self.staticType(whatROuteName,[String]);
+					if(router_store_list[whatROuteName] == null)
+						return '';
+					return router_store_list[whatROuteName];
+				}
+			})(self.routeName);
 		});
 	};
 	
@@ -355,7 +367,9 @@
 	 */
 	Router.prototype.addRoute = function (pattern, Handler, observe) {
 		this.routes.push(new Route(pattern, Handler, observe, this));
-	
+		if(observe != null && observe.name != null){
+			this.routeName[observe.name] = this.basePath+pattern;
+		}
 		return this;
     };
     
@@ -428,7 +442,6 @@
 	
 			var defaults = typeof this.data === 'function' ? this.data() : this.data;
 			var data = assign(defaults, options.state, options.hash, options.qs);
-			console.log('ggggggggggg',data);
 			route.urlData = defaults
 			// destroy existing route
 			if (this.route) {
@@ -613,7 +626,7 @@
 					if (_this.reloadOnClick) {
 						_this.dispatch(href, { reload: true });
 					} else {
-						_this.dispatch(href,{});
+						_this.dispatch(href,{ noHistory : false });
 					}
 	
 					e.preventDefault();

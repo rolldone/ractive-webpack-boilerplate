@@ -9,6 +9,7 @@ import '../assets/semantic/dist/semantic.min.js';
 import '../base/BaseCommon.js';
 import '../base/swal.js';
 import InitPubSub from './middleware/InitPubSub';
+import OnlyPartnerAccess from './middleware/OnlyPartnerAccess';
 import BaseHttpRequest from './partner/services/BaseHttpRequest.js';
 import PrivilegeHttpRequest from './partner/services/PrivilegeHttpRequest';
 
@@ -24,39 +25,6 @@ const router = new Router({
     return {};
   },
 });
-
-router.addRoute('/user/users', function(){
-  return new Promise(function(resolve){
-    require.ensure([],function(){
-      var Users = require('./partner/user/Users');
-      resolve(Users.default);
-    })
-  })
-},{
-  middleware : []
-});
-
-router.addRoute('/user/new',function(){
-  return new Promise(function(resolve){
-    require.ensure([],function(){
-      var User = require('./partner/user/UserNew');
-      resolve(User.default);
-    })
-  })
-},{
-  middleware : []
-})
-
-router.addRoute('/user/:id/view',function(){
-  return new Promise(function(resolve){
-    require.ensure([],function(){
-      var User = require('./partner/user/UserUpdate');
-      resolve(User.default);
-    })
-  })
-},{
-  middleware : []
-})
 
 router.addRoute('/404',function(){
   return new Promise(function(resolve){
@@ -82,15 +50,24 @@ router.addRouteException(function(errorNumber){
   }
 })
 
+require('./partner/user/route.js')(router);
+require('./partner/cuisine/route.js')(router);
+require('./partner/product/route.js')(router);
+
 /* Untuk Pertama Kali Loaded */
 router.setOnInit(async function(next){
-  let httpRequest = new BaseHttpRequest();
-  let resData = await httpRequest.getApiRoute();
-  httpRequest.setApiRoute(resData.return);
-  httpRequest = new PrivilegeHttpRequest();
-  resData = await httpRequest.getSelfPrivilege();
-  httpRequest.setSelfPrivilege(resData.return);
-  next(null);
+  try{
+    let httpRequest = new BaseHttpRequest();
+    let resData = await httpRequest.getApiRoute();
+    console.log('resssdata',resData);
+    httpRequest.setApiRoute(resData.return);
+    httpRequest = new PrivilegeHttpRequest();
+    resData = await httpRequest.getSelfPrivilege();
+    httpRequest.setSelfPrivilege(resData.return);
+    next(null);
+  }catch(ex){
+    window.location.href = '/auth/login';
+  }
 });
 
 /* Untuk Pertama Kali Loaded */
@@ -99,12 +76,14 @@ router.setOnComplete(function(next){
     .dispatch(window.location.pathname, {
       noHistory : true
     })
-    .watchLinks()
+    /* Ini untuk selalu listen a href */
+    // .watchLinks()
+    /* Ini penting untuk menjaga historynya  */
     .watchState();
   next(null);
 })
 
-router.setOnBeforeEach([InitPubSub]);
+router.setOnBeforeEach([OnlyPartnerAccess,InitPubSub]);
 router.setOnAfterEach([function(next){
   feather.replace();
   next();

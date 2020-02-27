@@ -518,11 +518,17 @@ var BaseRactive = Ractive.extend({
 		window.staticType(stringUrl,[String]);
 		return config.API_ASSET_URL+stringUrl;
 	},
-	dispatch : function(stringUrl){
-		window.router.dispatch(stringUrl,{
+	dispatch : function(stringUrlOrName){
+		if(this.routeName(stringUrlOrName) != ''){
+			stringUrlOrName = this.routeName(stringUrlOrName);
+		}
+		window.router.dispatch(stringUrlOrName,{
 			noHistory : false
 		})
 	},
+	routeName : function(whatRouteName){
+		return window.router.routeName(whatRouteName);
+	}
 })
 
 

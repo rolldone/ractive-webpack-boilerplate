@@ -1,4 +1,6 @@
 import template from './views/InputCheckboxView.html';
+import BaseRactive from 'BaseRactive';
+
 let InputCheckbox = BaseRactive.extend({
   template,
   data : function(){

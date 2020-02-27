@@ -20,24 +20,11 @@ Ractive.defaults.onteardown=function(){
 };
 Ractive.DEBUG = true; ///unminified/.test(() => { /* unminified */ });
 
-/* Define Easy use GLobal Url */
-window.routeApi = function(api_store_list){
-	window.staticType(api_store_list,[Object]);
-	return function(whatName){
-		window.staticType(whatName,[String]);
-		if(api_store_list[whatName] == null){
-			return '';
-		}
-		return api_store_list[whatName];
-	}
-}
-
-/* Define Privilege Easy Use Global */
-window.hasPermission = function(privilege_store_list){
-	window.staticType(privilege_store_list,[Object]);
-	return function(privilegeCode){
-		window.staticType(privilegeCode,[String]);
-		if(privilege_store_list[privilegeCode] == null)
+window.routeName = function(router_store_list){
+	window.staticType(router_store_list,[Object]);
+	return function(whatROuteName){
+		window.staticType(whatROuteName,[String]);
+		if(router_store_list[whatROuteName] == null)
 			return false;
 		return true;
 	}

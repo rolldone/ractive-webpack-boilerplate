@@ -1,0 +1,81 @@
+{{#partial ingredient_list}}
+  <div class="field" id="ingredient_list">
+    <ingredient-dialog ref="ingredient_form_dialog"></ingredient-dialog>
+    <ingredient-list ref="ingredient_form_list"></ingredient-list>
+    <span class="base_info error bold small"></span>
+  </div> 
+  {{/partial}}
+  <form class="base_wr column ui form" id="form-create">
+    <input-import label="{{ @global.gettext('Import') }}" name="photo" placeholder="{{@global.gettext('Import')}}"></input-import>
+    <input-text label="{{ @global.gettext('Nom') }}" name="nom" placeholder="{{@global.gettext('Nom')}}" type="text"></input-text>
+    <input-dropdown datas="{{type_forms}}" other_value_key="key" dropdown_text="value" label="{{ @global.gettext('Category') }}" name="category" class="select-category" id="category"></input-dropdown>
+    {{#if form_type_select == "PLA"}}
+    <input-text label="{{ @global.gettext('Description') }}" form_title="{{@global.gettext('DÉTAILS')}}" name="description" placeholder="{{@global.gettext('Description')}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext('Ingrédients') }}" name="ingredients" placeholder="{{@global.gettext('Ingrédients')}}" type="text"></input-text>
+    <button on-click="@this.handleClick('SELECT_INGREDIENT',{},@event)">{{@global.gettext("Select Ingredients")}}</button>
+    {{>ingredient_list}}
+    <input-text label="{{ @global.gettext('Allergènes') }}" name="allergenes" placeholder="{{@global.gettext('Allergènes')}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext('Accompagnement') }}" name="accompagnement" placeholder="{{@global.gettext('Accompagnement')}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext('Înformation supplémentaires') }}" name="information_supplementaires" placeholder="{{@global.gettext('Înformation supplémentaires')}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext('Recette') }}" name="recette" placeholder="{{@global.gettext('Recette')}}" type="text"></input-text>
+    <input-dropdown datas="{{conseils_de_preparation_datas}}" other_value_key="key" dropdown_text="value" label="{{ @global.gettext('Comment réchaffer son plat') }}" name="conseils_de_preparation" placeholder="{{@global.gettext('Comment réchaffer son plat')}}" class="select-conseils_de_preparation" id="conseils_de_preparation"></input-dropdown>
+    <input-text label="{{ @global.gettext('Conservation') }}" name="conservation" placeholder="{{@global.gettext('Conservation')}}" type="text"></input-text>
+    <input-checkbox label="{{ @global.gettext('Congélation') }}" name="congelation" placeholder="{{@global.gettext('Congélation')}}" class="congelation" id="congelation"></input-checkbox>
+    <input-text label="{{ @global.gettext('Prix solo (€ TTC)') }}" name="prix_solo" placeholder="{{@global.gettext('Prix solo (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix consigne solo (€ TTC)') }}" name="prix_consigne_solo" placeholder="{{@global.gettext('Prix consigne solo (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix duo (€ TTC') }}" name="prix_duo" placeholder="{{@global.gettext('Prix duo (€ TTC')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix consigne duo (€ TTC)') }}" name="prix_consigne_duo" placeholder="{{@global.gettext('Prix consigne duo (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix famille (€ TTC)') }}" name="prix_famille" placeholder="{{@global.gettext('Prix famille (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix consigne famille (€ TTC)') }}" name="prix_consigne_famille" placeholder="{{@global.gettext('Prix consigne famille (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Suggestions vins') }}" name="suggestions_vins" placeholder="{{@global.gettext('Suggestions vins')}}" type="text"></input-text>
+    {{elseif form_type_select == "ENT"}}
+    <input-text label="{{ @global.gettext('Description') }}" form_title="{{@global.gettext('DÉTAILS')}}" name="description" placeholder="{{@global.gettext('Description')}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext('Ingrédients') }}" name="ingredients" placeholder="{{@global.gettext('Ingrédients')}}" type="text"></input-text>
+    <button on-click="@this.handleClick('SELECT_INGREDIENT',{},@event)">{{@global.gettext("Select Ingredients")}}</button>
+    {{>ingredient_list}}
+    <input-text label="{{ @global.gettext('Allergènes') }}" name="allergenes" placeholder="{{@global.gettext('Allergènes')}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext('Înformation supplémentaires') }}" name="information_supplementaires" placeholder="{{@global.gettext('Înformation supplémentaires')}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext('Recette') }}" name="recette" placeholder="{{@global.gettext('Recette')}}" type="text"></input-text>
+    <input-dropdown datas="{{conseils_de_preparation_datas}}" other_value_key="key" dropdown_text="value" label="{{ @global.gettext('Comment réchaffer son plat') }}" name="conseils_de_preparation" placeholder="{{@global.gettext('Comment réchaffer son plat')}}" class="select-conseils_de_preparation" id="conseils_de_preparation"></input-dropdown>
+    <input-text label="{{ @global.gettext('Conservation') }}" name="conservation" placeholder="{{@global.gettext('Conservation')}}" type="text"></input-text>
+    <input-checkbox label="{{ @global.gettext('Congélation') }}" name="congelation" placeholder="{{@global.gettext('Congélation')}}" class="congelation" id="congelation"></input-checkbox>
+    <input-text label="{{ @global.gettext('Prix solo (€ TTC)') }}" name="prix_solo" placeholder="{{@global.gettext('Prix solo (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix consigne solo (€ TTC)') }}" name="prix_consigne_solo" placeholder="{{@global.gettext('Prix consigne solo (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix duo (€ TTC)') }}" name="prix_duo" placeholder="{{@global.gettext('Prix duo (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix consigne duo (€ TTC)') }}" name="prix_consigne_duo" placeholder="{{@global.gettext('Prix consigne duo (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix famille (€ TTC)') }}" name="prix_famille" placeholder="{{@global.gettext('Prix famille (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix consigne famille (€ TTC)') }}" name="prix_consigne_famille" placeholder="{{@global.gettext('Prix consigne famille (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Suggestions vins') }}" name="suggestions_vins" placeholder="{{@global.gettext('Suggestions vins')}}" type="text"></input-text>
+    {{elseif form_type_select == "DES"}}
+    <input-text label="{{ @global.gettext('Description') }}" form_title="{{@global.gettext('DÉTAILS')}}" name="description" placeholder="{{@global.gettext('Description')}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext('Ingrédients') }}" name="ingredients" placeholder="{{@global.gettext('Ingrédients')}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext('Accompagnement') }}" name="accompagnement" placeholder="{{@global.gettext('Accompagnement')}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext('Înformation supplémentaires') }}" name="information_supplementaires" placeholder="{{@global.gettext('Înformation supplémentaires')}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext('Recette') }}" name="recette" placeholder="{{@global.gettext('Recette')}}" type="text"></input-text>
+    <input-dropdown datas="{{conseils_de_preparation_datas}}" other_value_key="key" dropdown_text="value" label="{{ @global.gettext('Comment réchaffer son plat') }}" name="conseils_de_preparation" placeholder="{{@global.gettext('Comment réchaffer son plat')}}" class="select-conseils_de_preparation" id="conseils_de_preparation"></input-dropdown>
+    <input-text label="{{ @global.gettext('Conservation') }}" name="conservation" placeholder="{{@global.gettext('Conservation')}}" type="text"></input-text>
+    <input-checkbox label="{{ @global.gettext('Congélation') }}" name="congelation" placeholder="{{@global.gettext('Congélation')}}" class="congelation" id="congelation"></input-checkbox>
+    <input-text label="{{ @global.gettext('Prix solo (€ TTC)') }}" name="prix_solo" placeholder="{{@global.gettext('Prix solo (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix consigne solo (€ TTC)') }}" name="prix_consigne_solo" placeholder="{{@global.gettext('Prix consigne solo (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix duo (€ TTC)') }}" name="prix_duo" placeholder="{{@global.gettext('Prix duo (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix consigne duo (€ TTC)') }}" name="prix_consigne_duo" placeholder="{{@global.gettext('Prix consigne duo (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix famille (€ TTC)') }}" name="prix_famille" placeholder="{{@global.gettext('Prix famille (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix consigne famille (€ TTC)') }}" name="prix_consigne_famille" placeholder="{{@global.gettext('Prix consigne famille (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Suggestions vins') }}" name="suggestions_vins" placeholder="{{@global.gettext('Suggestions vins')}}" type="text"></input-text>
+    {{elseif form_type_select == "BOI"}}
+    <input-dropdown datas="{{type_datas}}" other_value_key="key" form_title="{{@global.gettext('DÉTAILS')}}" dropdown_text="value" label="{{ @global.gettext('Type') }}" name="type" placeholder="{{@global.gettext('Type')}}" class="select-type" id="type"></input-dropdown>
+    <input-dropdown datas="{{contenance_datas}}" other_value_key="key" dropdown_text="value" label="{{ @global.gettext('Contenance') }}" name="contenance" placeholder="{{@global.gettext('Contenance')}}" class="select-contenance" id="contenance"></input-dropdown>
+    <input-text label="{{ @global.gettext('Conservation') }}" name="conservation" placeholder="{{@global.gettext('Conservation')}}" type="text"></input-text>
+    <input-dropdown datas="{{conditionnement_datas}}" other_value_key="key" dropdown_text="value" label="{{ @global.gettext('Conditionnement') }}" name="conditionnement" placeholder="{{@global.gettext('Conditionnement')}}" class="select-conditionnement" id="conditionnement"></input-dropdown>
+    <input-checkbox label="{{ @global.gettext('Consignes') }}" name="consignes" placeholder="{{@global.gettext('Consignes')}}" class="consignes" id="consignes"></input-checkbox>
+    <input-text label="{{ @global.gettext('Tarif consigne') }}" name="tarif_consigne" placeholder="{{@global.gettext('Tarif consigne')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Prix (€ TTC)') }}" name="prix_solo" placeholder="{{@global.gettext('Prix (€ TTC)')}}" type="number"></input-text>
+    <input-text label="{{ @global.gettext('Information supplémentaire') }}" name="information_supplementaires" placeholder="{{@global.gettext('Information supplémentaire')}}" type="text"></input-text>
+    {{/if}}
+    <!--- <p>{{gettext("Note")}} : --</p> -->
+    <p></p>
+    <div class="base_wr row btn">
+      <button class="ui primary button" on-click="@this.handleClick('SUBMIT',{},@event)">{{submit}}</button>
+      <button class="ui basic button" on-click="@this.handleClick('BACK',{},@event)">{{@global.gettext("ANNULER")}}</button>
+    </div>
+  </form>

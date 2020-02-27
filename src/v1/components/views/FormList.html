@@ -1,0 +1,38 @@
+<div class="wr_form_list">
+	<table class="ui striped table">
+		<thead>
+			<tr>
+				<th>{{ @global.gettext("No") }}</th>
+				<th>{{ @global.gettext("Nom du droit d'accès") }}</th>
+				<th>{{ @global.gettext("Description") }}</th>
+				<th>{{ @global.gettext("Dernière modification") }}</th>
+				<th>{{ @global.gettext("Option") }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each datas:i}}
+			<tr>
+				<td>{{i+1}}</td>
+				<td></td>
+				<td></td>
+				<td>{{@global.moment(updated_at,'YYYY-MM-DD HH:mm:ss').format('LL')}}</td>
+				<td>
+					<div class="list-menu-click" style="position: relative;">
+						<i class="ion ion-md-create"></i>
+					</div>
+					<div id="popup" class="ui fluid popup bottom left transition hidden" style="">
+						<div class="ui four column relaxed divided grid">
+							<div class="column">
+								<div class="ui link list">
+									<a class="item nowrap" href="{{@this.setUrl(@global.HTTP_REQUEST.PRODUCT.VIEW,[{':id':id}])}}">{{@global.gettext("Éditer")}}</a>
+									<a class="item nowrap" href="#" on-click="@this.handleClick('DELETE_ITEM',{id : id},@event)">{{@global.gettext("Supprimer")}}</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>

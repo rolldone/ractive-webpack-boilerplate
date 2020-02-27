@@ -1,0 +1,5 @@
+<div class="ui top attached tabular menu">
+{{#tabs:i}}
+  <div class="{{@global.parseInt(active)==i?'active':''}} item" on-click="@this.handleClick('CLICK',{index : i},@event)">{{tabs[i].label}}</div>
+{{/tabs}}
+</div>

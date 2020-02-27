@@ -1,6 +1,6 @@
 import FilterBar from './FilterBar';
 import template from './views/ListTableView.html';
-import BaseRactive from '@app/lib/ractive/BaseRactive';
+import BaseRactive from 'BaseRactive';
 
 var ListTable = BaseRactive.extend({
     template,
@@ -23,7 +23,6 @@ var ListTable = BaseRactive.extend({
         let self = this;
         self.initPagination();
         let resData = await self.getDatas();
-        console.log('oncomplete - resData',resData);
         self.setDatas(resData); 
     },
     categoryGroup : function(array=[],key){

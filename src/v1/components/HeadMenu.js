@@ -6,7 +6,7 @@ export default BaseRactive.extend({
 	isolate : true,
 	data : function(){
 		return {
-			page_name : "Créer un nouvel utilisateur"
+			page_name : gettext("Créer un nouvel utilisateur")
 		}
 	},
 	onconfig : function(){

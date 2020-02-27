@@ -1,6 +1,6 @@
 import '@app/assets/sweetalert2/dist/sweetalert2.min.css';
 
-var swalDeleted = function(message) {
+window.swalDeleted = function(message) {
     return Swal.fire(
   'Deleted!',
   message,
@@ -36,7 +36,7 @@ window.swalSuccess = function(title,message,callback) {
     })
 }
 
-var swalConfirm = function(props,callback) {
+window.swalConfirm = function(props,callback) {
     return swal.fire({
       text: props.text,
       type: props.type || 'warning',
@@ -49,7 +49,7 @@ var swalConfirm = function(props,callback) {
     });
 }
 
-var swalMailSend = function(message) {
+window.swalMailSend = function(message) {
     return swal({
         imageUrl: '',
         imageWidth: 100,
@@ -58,7 +58,7 @@ var swalMailSend = function(message) {
     });
 }
 
-var swalFailure = function(title, message,callback) {
+window.swalFailure = function(title, message,callback) {
     window.staticType(title,[String]);
     window.staticType(message,[null,String,Boolean]);
     return Swal.fire(

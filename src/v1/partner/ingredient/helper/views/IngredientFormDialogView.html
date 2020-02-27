@@ -1,0 +1,26 @@
+<div class="ui modal" id="{{root_id}}">
+    <div class="header">{{@global.gettext("Sélectionner des ingrédients")}}</div>
+    <div class="content">
+        <form class="base_wr column ui form" id="form-create">
+            {{#if action == 'UPDATE'}}
+            <input-text label="{{ @global.gettext('') }}" value="{{form_data.nom_de_ingredient}}" name="nom_de_ingredient" placeholder="{{@global.gettext(`Nom de l'ingrédient`)}}" type="text"></input-text>
+            {{else}}
+            <input-search-dropdown datas="{{ingredient_datas}}" ref="ingredient_id" other_value_key="" dropdown_text="value" label="{{ @global.gettext(`Nom de l'ingrédient`) }}" name="ingredient_id" placeholder="{{@global.gettext(`Nom de l'ingrédient`)}}" class="select-ingredient" id="ingredient_id"></input-search-dropdown>
+            {{/if}}
+            {{#if is_new_ingredient == true}}
+            <!-- If doesnt have ingredient -->
+            <input-text label="{{ @global.gettext(`Nom de l'ingrédient`) }}" value="{{form_data.nom_de_ingredient}}" name="nom_de_ingredient" placeholder="{{@global.gettext(`Nom de l'ingrédient`)}}" type="text"></input-text>
+            <unit-de-mesure  ref="unite_de_mesure_new" datas="{{unite_de_mesure_datas}}" other_value_key="value" dropdown_text="name" label="{{ @global.gettext('Unité de mesure') }}" name="unite_de_mesure" placeholder="{{@global.gettext('Unité de mesure')}}" class="select-unite_de_mesure" id="unite_de_mesure"></unit-de-mesure>
+            {{else}}
+            <!-- If have ingredient -->
+            <input-text label="{{ @global.gettext('Unité de mesure') }}" value="{{form_data.unite_de_mesure}}" name="unite_de_mesure" placeholder="{{@global.gettext('Unité de mesure')}}" type="text" disabled="true"></input-text>
+            {{/if}}
+            <input-text label="{{ @global.gettext('Quantité') }}" value="{{form_data.qty}}" name="qty" placeholder="{{@global.gettext('Quantité')}}" type="number"></input-text>
+            <p></p>
+            <div class="base_wr row btn">
+                <button class="ui primary button" on-click="@this.handleClick('SUBMIT',{},@event)">{{submit}}</button>
+                <button class="ui basic button" on-click="@this.handleClick('BACK',{},@event)">{{@global.gettext("ANNULER")}}</button>
+            </div>
+        </form>
+    </div>
+</div>

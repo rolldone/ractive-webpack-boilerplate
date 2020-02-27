@@ -19,6 +19,12 @@ BaseRactive.components.Icon = BaseRactive.extend({
 BaseRactive.components['route-link'] = BaseRactive.extend({
   template : LinkView,
   isolate : true,
+  oncomplete : function(){
+    let self = this;
+    self.observe('href',function(val1,val2){
+      self.href = val1;
+    })
+  },
   handleClick : function(action,props,e){
       let self = this;
       switch(action){
@@ -29,7 +35,7 @@ BaseRactive.components['route-link'] = BaseRactive.extend({
                       return self.fire('linkClickListener',e);
                   }
               }
-              let href = $(e.target).attr('href');
+              let href = self.href;
               if(self.validURL(href) == true){
                   return window.location.href = href;
               }

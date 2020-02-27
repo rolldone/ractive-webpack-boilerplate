@@ -95,7 +95,16 @@ var BaseHttpRequest = function(){
 		for(var a in route){
 			newRoute[a] = baseHttp+route[a];
 		}
-		window.routeApi = window.routeApi(newRoute);
+		window.routeApi = (function(api_store_list){
+			window.staticType(api_store_list,[Object]);
+			return function(whatName){
+				window.staticType(whatName,[String]);
+				if(api_store_list[whatName] == null){
+					return '';
+				}
+				return api_store_list[whatName];
+			}
+		})(newRoute);
 		return route = newRoute;
 	};
 	self.setPrivilegeMap = function(privileges){

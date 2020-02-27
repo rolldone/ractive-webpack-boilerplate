@@ -1,0 +1,46 @@
+<div id="users" class="base_wr column" data-state="{{update_state}}" style="position: relative;">
+	<form class="base_wr column ui form">
+		<input-search-dropdown style="width: 100%" datas="{{cuisines}}" other_value_key="id" dropdown_text="nom" label="{{ @global.gettext('Recherche cuisine') }}" name="cuisines_id" placeholder="{{@global.gettext('Recherche cuisine')}}" class="select-cuisines_id" id="cuisine_id"></input-search-dropdown>
+			<p></p>
+		<div class="base_wr row btn">
+			<button class="ui primary button" on-click="@this.handleClick('SUBMIT',{},@event)">{{submit}}</button>
+		</div>
+	</form>
+	<table class="ui striped table">
+		<thead>
+			<tr>
+				<th>{{@global.gettext("No")}}</th>
+				<th>{{@global.gettext("Nom")}}</th>
+				<th>{{@global.gettext("Créé à")}}</th>
+				<th>{{@global.gettext("Option")}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each datas:i}}
+			<tr>
+				<td>{{i+1}}</td>
+				<td>{{cuisine.nom}}</td>
+				<td>{{@global.moment(updated_at,'YYYY-MM-DD HH:mm:ss').format('LL')}}</td>
+				<td>
+					<div class="ui grid">
+						<div class="two wide column" on-click="@this.handleClick('DELETE_ITEM',{id : id},@event)"><i style="color:red; cursor: pointer;" class="ion ion-md-close"></i></div>
+					</div>
+				</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+	{{#if pagination_numbers.length > 0}}
+	<div>
+		<div class="ui pagination menu" id="pag-data">
+			{{#each (pagination_numbers):i}}
+			{{#if pagination_numbers[0] != 1 && i == 0}}
+			<a class="item" data-value="1" on-click="@this.handleClick('PAGINATION',{page : 1, is_first : true, is_last : false},@event)">1</a>
+			<div class="disabled item">...</div>
+			{{/if}}
+			<a class="item" data-value="{{pagination_numbers[i]}}" on-click="@this.handleClick('PAGINATION',{page : pagination_numbers[i], is_first : i==0, is_last : i==pagination_numbers.length-1},@event)">{{pagination_numbers[i]}}</a>
+			{{/each}}
+		</div>
+	</div>  
+	{{/if}}
+</div>

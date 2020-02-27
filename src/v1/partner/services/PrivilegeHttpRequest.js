@@ -22,7 +22,15 @@ var PrivilegeHttpRequest = function(){
             var privItem = props.privilege_items[a];
             privilegesSet[privItem.access_type] = privItem.access_type;
         }
-        window.hasPermission = window.hasPermission(privilegesSet);
+        window.hasPermission = (function(privilege_store_list){
+            window.staticType(privilege_store_list,[Object]);
+            return function(privilegeCode){
+                window.staticType(privilegeCode,[String]);
+                if(privilege_store_list[privilegeCode] == null)
+                    return false;
+                return true;
+            }
+        })(privilegesSet);
     }
     self.getBelowGroupId = async function(){
         try{

@@ -1,4 +1,6 @@
 import template from './views/InputSearchDropdownView.html';
+import InputDropdown from './InputDropdown.js';
+
 var InputSearchDropdown = InputDropdown.extend({
   template,
   data : function(){
