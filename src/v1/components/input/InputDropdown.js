@@ -1,5 +1,5 @@
 import template from './views/InputDropdownView.html';
-import BaseRactive from '../../../lib/ractive/BaseRactive';
+import BaseRactive from 'BaseRactive';
 /** Pass Props : 
 ------------------------------------------
 - datas

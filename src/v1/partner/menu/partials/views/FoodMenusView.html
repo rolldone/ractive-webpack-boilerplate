@@ -1,0 +1,82 @@
+{{#partial form_create}}
+<form class="ui grid" id="form-update-{{bus_param_id}}">
+    <div class="three wide computer column">
+        <input-dropdown ref="option_plats_menus" datas="{{plats_menus}}" other_value_key="" dropdown_text="nom"
+            name="plat_menu" id="plats_menu_{{bus_param_id}}" label="{{ @global.gettext('Sélectionner le menu') }}">
+        </input-dropdown>
+    </div>
+    <div class="three wide computer column">
+        <input-text name="initial_value" type="number" label="{{ @global.gettext('Ajouter du stock') }}"></input-text>
+    </div>
+    <div class="one wide computer column">
+        <button class="ui primary button" on-click="@this.handleClick('ADD',{},@event)">
+            <span>+</span>
+        </button>
+    </div>
+</form>
+{{/partial}}
+{{#partial form_update}}
+<form id="form-update-{{bus_param_id}}" class="base_wr column ui form" style="border:none">
+    <input-dropdown ref="option_plats_menus" datas="{{plats_menus}}" other_value_key="" dropdown_text="nom"
+        name="plats_id" id="plats_menu_{{bus_param_id}}" label="{{ @global.gettext('Sélectionner le menu') }}">
+    </input-dropdown>
+    <input-text name="last_stock_total" type="number" label="{{ @global.gettext('Dernier stock') }}" disabled="true">
+    </input-text>
+    <input-dropdown ref="action" datas="{{actions_datas}}" other_value_key="" dropdown_text="name" name="action"
+        id="select_actions" label="{{ @global.gettext('Sélectionner le menu') }}"></input-dropdown>
+    <input-text name="initial_value" type="number" label="{{ @global.gettext('Ajouter du stock') }}"></input-text>
+    <p></p>
+    <div class="base_wr row btn">
+        <button class="ui primary button" on-click="@this.handleClick('UPDATE',{},@event)">
+            <span>{{ @global.gettext('Ajouter') }}</span>
+        </button>
+        <button class="ui button" on-click="@this.handleClick('CANCEL',{},@event)">
+            <span>{{ @global.gettext('Annuler') }}</span>
+        </button>
+    </div>
+</form>
+{{/partial}}
+<h3 class="ui dividing header">{{title}}</h3>
+<div class="menu-wrapper">
+    <div class="menu">
+        {{#if form_data.id == null}}
+        {{>form_create}}
+        {{else}}
+        {{>form_update}}
+        {{/if}}
+        {{#if form_data.id == null}}
+        <div class="menus_list">
+            <ul>
+                {{#saved_menus:i}}
+                <li>
+                    <h3 on-click="@this.handleClick('DETAIL',{id:id,index:i},@event)">
+                        {{plats.nom}}
+                        <i data-feather="edit-2"></i>
+                    </h3>
+                    <div class="stock">
+                        <i data-feather="package"></i>
+                        {{@this.getLastStock(last_stock_menu)}}
+                    </div>
+                    <div class="delete" on-click="@this.handleClick('DELETE',{ id : id },@event)">
+                        <i data-feather="trash-2"></i>
+                    </div>
+                </li>
+                {{/saved_menus}}
+            </ul>
+        </div>
+        {{/if}}
+    </div>
+    <div class="detail">
+        {{#if config != null}}
+        <form class="base_wr column ui form" id="form-create-{{bus_param_id}}">
+            <input type="hidden" name="menus_id">
+            <input-text label="{{ @global.gettext('Valeur initiale') }}" name="initial_value"
+                placeholder="{{@global.gettext('Valeur initiale')}}" type="text"></input-text>
+        </form>
+        {{else}}
+        <div class="history_list" style="position: relative;overflow-y: auto;/* overflow: hidden; */height: 100%;">
+            <stock-histories></stock-histories>
+        </div>
+        {{/if}}
+    </div>
+</div>

@@ -1,0 +1,21 @@
+{{#partial submit}}
+  <p></p>
+  <div class="base_wr row btn">
+    <button class="ui primary button" on-click="@this.handleClick('SUBMIT',{},@event)">{{submit}}</button>
+    <button class="ui basic button" on-click="@this.handleClick('BACK',{},@event)">{{@global.gettext("ANNULER")}}</button>
+  </div>
+{{/partial}}
+<form class="base_wr column ui form" id="form-create">
+  <input-text label="{{ @global.gettext('La date') }}" name="date" placeholder="{{@global.gettext('La date')}}" type="text" id="date"></input-text>
+  {{#if form_data.id == null}}
+    {{>submit}}
+  {{else}}
+    {{#if form_data.date != old_form_data.date}}
+    {{>submit}}
+    {{/if}}
+  {{#menu_datas:i}}
+  <food-menus title="{{value}}" menu_header_id="{{form_data.id}}" bus_param_id="{{id}}"></food-menus>
+  {{/menu_datas}}
+  <!-- <p>{{gettext("Note")}} : --</p> -->
+  {{/if}}
+</form>

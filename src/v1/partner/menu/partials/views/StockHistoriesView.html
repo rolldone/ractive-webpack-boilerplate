@@ -1,0 +1,15 @@
+<div id="users" class="base_wr column" data-state={{update_state}} style="position: relative;">
+    {{#datas:i}}
+    <span>Initial Value : {{initial_value}}</span><br/>
+    <span>Debet : {{debet}}</span><br/>
+    <span>Credit : {{credit}}</span><br/>
+    <span>Created : {{created_at}}</span>
+    {{/datas}}
+    {{#if datas.length >0 }}
+      <div class="grid">
+        {{i}}
+      </div>
+    {{else}}
+      <h2>{{ @global.gettext("Rien n'a trouvé de données d'historique") }}</h2>
+    {{/if}}
+  </div>

@@ -1,6 +1,6 @@
 import BaseRactive from 'BaseRactive';
 import InputText from '@v1/components/input/Input';
-import InputCheckbox from '@v1/components/input/InputCheckbox';
+import InputCheckbox from '@v1/components/input/InputCheckbox.js';
 import InputDropdown from '@v1/components/input/InputDropdown';
 import InputImport from '@v1/components/input/InputImport';
 import template from './views/ProductNewView.html';

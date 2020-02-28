@@ -4,7 +4,7 @@ import Layout from "../Layout";
 import template from './views/CuisineNewView.html';
 import TabHead from "../../components/tab/TabHead";
 import TabPage from "../../components/tab/TabPage";
-import InputCheckBox from '@v1/components/input/InputCheckBox.js';
+import InputCheckbox from '@v1/components/input/InputCheckbox.js';
 import InputDropdown from '@v1/components/input/InputDropdown.js';
 import InputImport from '@v1/components/input/InputImport.js';
 import InputText from '@v1/components/input/Input.js';
@@ -15,7 +15,7 @@ export const CuisineNew = BaseRactive.extend({
       "tab-head" : TabHead,
       "tab-page" : TabPage,
       "input-text" : InputText,
-      "input-checkbox" : InputCheckBox,
+      "input-checkbox" : InputCheckbox,
       "input-dropdown" : InputDropdown,
       "input-import" : InputImport,
     },

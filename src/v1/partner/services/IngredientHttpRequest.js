@@ -16,7 +16,7 @@ export default function(){
         getIngredient : async function(id){
             window.staticType(id,[Number,String]);
             try{
-                let resdata = await this.getData(this.setUrl(window.HTTP_REQUEST.INGREDIENT_XHR.VIEW,[{":id":id}]));
+                let resdata = await this.getData(this.setUrl(window.HTTP_REQUEST.INGREDIENT_XHR.VIEW,[{"{id}":id}]));
                 if(resdata.status == "error")
                     throw resdata.data.responseJSON;
                 return resdata;

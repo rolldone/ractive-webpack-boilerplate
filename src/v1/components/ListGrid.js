@@ -1,6 +1,6 @@
 import FilterBar from './FilterBar';
-import BaseRactive from '@base/lib/BaseRactive.js';
 import template from './views/FilterBarView.html';
+import BaseRactive from 'BaseRactive';
 
 var ListGrid = BaseRactive.extend({
   template,

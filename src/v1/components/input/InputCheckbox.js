@@ -1,7 +1,7 @@
 import template from './views/InputCheckboxView.html';
 import BaseRactive from 'BaseRactive';
 
-let InputCheckbox = BaseRactive.extend({
+export default BaseRactive.extend({
   template,
   data : function(){
     return {
@@ -15,5 +15,3 @@ let InputCheckbox = BaseRactive.extend({
   onrender : function(){},
   oncomplete : function(){},
 })
-
-export default InputCheckbox;
