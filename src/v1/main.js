@@ -6,7 +6,7 @@ import "../assets/ionicons/dist/scss/ionicons.scss";
 import "../assets/v1/css/backend.scss";
 import "../assets/semantic/dist/semantic.min.js";
 import "../base/BaseCommon.js";
-import "../base/swal.js";
+import "../base/Swal.js";
 import InitPubSub from "./middleware/InitPubSub";
 import OnlyPartnerAccess from "./middleware/OnlyPartnerAccess";
 import BaseHttpRequest from "./partner/services/BaseHttpRequest.js";
