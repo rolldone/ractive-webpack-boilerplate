@@ -40,4 +40,8 @@ app.get('/v2/example/*',function(req,res){
   res.sendFile(__dirname + '/views/examplev2.html');
 })
 
+app.get('/v2/partner/*',function(req,res){
+  res.sendFile(__dirname + '/views/partnerv2.html');
+})
+
 app.listen(config.port, () => console.log(`Server running on port ${config.port}...`));

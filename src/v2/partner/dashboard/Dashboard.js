@@ -1,7 +1,6 @@
 import Layout from "../Layout";
 import template from './views/DashboardView.html';
 import BaseRactive from "BaseRactive";
-import SideMenu from './parent/SideMenu';
 
 export const Dashboard = BaseRactive.extend({
     template,
@@ -11,5 +10,4 @@ export const Dashboard = BaseRactive.extend({
 })
 export default Layout({
     BodyContent : Dashboard,
-    SideMenu
 })
