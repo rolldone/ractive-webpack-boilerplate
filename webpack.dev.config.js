@@ -8,10 +8,9 @@ const config = require('./webpack.config');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
-
 config.mode = "development";
 config.devtool = 'cheap-module-eval-source-map';
-const entryName = ['main','auth'];
+const entryName = ['main','auth', 'partnerv2'];
 for(var a=0;a<entryName.length;a++){
   if (typeof config.entry[entryName[a]] === 'string') {
     config.entry[entryName[a]] = ['webpack-hot-middleware/client', webpackConfig.entry[entryName[a]]];

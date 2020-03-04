@@ -63,6 +63,7 @@ module.exports = {
     auth: [path.resolve(__dirname, "./src/v1/auth")],
     main: [path.resolve(__dirname, "./src/v1/main")],
     examplev2: [path.resolve(__dirname, "./src/v2/example")],
+    partnerv2 : [path.resolve(__dirname, './src/v2/partner')],
     vendor: ["babel-polyfill"]
   },
   output: {
@@ -146,7 +147,10 @@ module.exports = {
         filename: path.join(__dirname, "views", "index.html")
     }), */
     /* Ini artinya membuatkan folder tujuan pada saat di compile */
-    new CopyPlugin([{ from: "src/assets/v1/img", to: "public/img" },{ from : 'src/assets/ionicons/dist' , to : 'public/ionicons'}]),
+    new CopyPlugin([
+      { from: 'src/assets/v1/img', to: 'public/img' },
+      { from: 'src/assets/v2/img', to: 'public/v2/img' },
+    ]),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
