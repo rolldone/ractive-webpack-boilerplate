@@ -15,10 +15,10 @@ export const MenuTabUpdate = MenuTabNew.extend({
           key: "FORM",
           label: gettext("Mettre à jour des menus")
         },
-        {
+        /* {
           key: "MENU_CUISINES",
           label: gettext("MENUS CUISINE")
-        }
+        } */
       ]
     };
   },

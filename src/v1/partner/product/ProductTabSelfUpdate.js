@@ -1,9 +1,24 @@
 import Layout from "../Layout";
 import { ProductTabUpdate } from "./ProductTabUpdate";
 import ProductUpdate from "./partials/ProductUpdate";
+import SelfPlatsHttpRequest from "../services/SelfPlatsHttpRequest";
 
 /* Override Product Update */
-var ProductSelfUpdate = ProductUpdate.extend({
+export const ProductSelfUpdate = ProductUpdate.extend({
+	data : function(){
+		return {
+			form_rules : {
+				nom : 'required',
+				category : 'required',
+				ingredient_datas : 'required',
+				/* Removed Because is self product */
+				/* cuisine_id : 'required|numeric' */
+			},
+		}
+	},
+	returnPlatHttpRequest : function(){
+		return new SelfPlatsHttpRequest();
+	},
 	getItem : async function(){
 		let self = this;
 		try{
@@ -14,23 +29,23 @@ var ProductSelfUpdate = ProductUpdate.extend({
 			console.error('getItem -> ',ex);
 		}
 	},
-	submitData : function(){
+	submitData : async function(){
 		let self = this;
 		self.setUpdate('form_data',{
 			id : self.root.get('id')
 		})
-		let formData = self.objectToFormData(self.get('form_data'));
-		let url = window.HTTP_REQUEST.PRODUCT_XHR.SELF_UPDATE;
+		await self.setUpdate('form_data',{
+			ingredient_datas : self.get('ingredient_datas').length > 0 ? JSON.stringify(self.get('ingredient_datas')):null
+		})
 		let current_form_rules = self.get('form_rules');
-		self.initSubmitValidation(current_form_rules,function(){
-			self.postData(url,formData).then(function(res){
-				switch(res.status){
-					case 'success':
-						swalSuccess(gettext("Édition du plat réalisée"));
-						return;
-					break;
-				}
-			})
+		self.initSubmitValidation(current_form_rules,async function(){
+			try{
+				let httpRequest = self.returnPlatHttpRequest();
+				let resData = await httpRequest.updatePlats(self.get('form_data'));
+				swalSuccess(gettext("Édition du plat réalisée"));
+			}catch(ex){
+				console.error('submitData - ex ',ex);
+			}
 		})
 	},
 })

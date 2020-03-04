@@ -1,0 +1,16 @@
+<div id="users" class="base_wr column">
+  <form class="base_wr column ui form" id="form-create">
+    <input-import label="{{ @global.gettext(`Profil photo`) }}" name="photo" placeholder="{{@global.gettext(`Profil photo`)}}"></input-import>
+    <input-text label="{{ @global.gettext(`Nom`) }}" form_title="{{title_form}}" name="nom" placeholder="{{@global.gettext(`Nom`)}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext(`Prenom`) }}" name="prenom" placeholder="{{@global.gettext(`Prenom`)}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext(`Email`) }}" form_title="{{@global.gettext(`DÉTAILS`)}}" name="email" placeholder="{{@global.gettext(`Email`)}}" type="email" disabled="{{is_email_disabled}}"></input-text>
+    <input-text label="{{ @global.gettext(`Créer un mot de passe`) }}" form_title="{{ @global.gettext(`Créer un mot de passe`) }}" name="password" placeholder="{{@global.gettext(`Créer un mot de passe`)}}" type="password"></input-text>
+    <input-text label="{{ @global.gettext(`Recréez un mot de passe`) }}" name="password_confirm" placeholder="{{@global.gettext(`Recréez un mot de passe`)}}" type="password"></input-text>
+    <!-- <p>{{gettext("Note")}} : --</p> -->
+    <p></p>
+    <div class="base_wr row btn">
+      <button class="ui primary button" on-click="@this.handleClick('SUBMIT',{},@event)">{{submit}}</button>
+      <button class="ui basic button" on-click="@this.handleClick('BACK',{},@event)">{{@global.gettext("ANNULER")}}</button>
+    </div>
+  </form>
+</div>

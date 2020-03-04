@@ -2,11 +2,11 @@ import BaseHttpRequest from './BaseHttpRequest';
 
 let MenuHttpRequest = function(){
     let self = (new BaseHttpRequest()).extend();
-    self.getMenus = async function(menus_id,bus_param_id){
+    self.getMenus = async function(menus_id,bus_param_id,url=null){
         window.staticType(menus_id,[Number,String]);
         window.staticType(bus_param_id,[Number,String]);
         try{
-            let url = window.HTTP_REQUEST.MENU_XHR.MENUS;
+            url = url || window.HTTP_REQUEST.MENU_XHR.MENUS;
             let resdata = await self.getData(url,{
                 menus_id : menus_id,
                 bussinee_parameter_id : bus_param_id

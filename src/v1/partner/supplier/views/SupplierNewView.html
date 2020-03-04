@@ -1,0 +1,34 @@
+<div id="users" class="base_wr column">
+  <form class="base_wr column ui form" id="form-create">
+    <input-import label="{{ @global.gettext(`Import`) }}" name="photo" placeholder="{{@global.gettext(`Import`)}}"
+      form_title="{{@global.gettext(`Formulaire fournisseurs`)}}"></input-import>
+    <input-text label="{{ @global.gettext(`Nom`) }}" name="nom" placeholder="{{@global.gettext(`Nom`)}}" type="text">
+    </input-text>
+    <input-dropdown datas="{{bus_param}}" other_value_key="key" dropdown_text="value"
+      label="{{ @global.gettext(`Category`) }}" name="bussinee_parameter_id" class="select-category" id="category">
+    </input-dropdown>
+    <input-text label="{{ @global.gettext(`Description`) }}" form_title="{{@global.gettext(`DÉTAILS`)}}"
+      name="description" placeholder="{{@global.gettext(``)}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext(`Numéro et rue`) }}" name="numero_et_rue"
+      placeholder="{{@global.gettext(`Numéro et rue`)}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext(`Code Postal`) }}" name="code_postal"
+      placeholder="{{@global.gettext(`Code Postal`)}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext(`Ville`) }}" name="ville" placeholder="{{@global.gettext(`Ville`)}}"
+      type="text"></input-text>
+    <input-text label="{{ @global.gettext(`URL du site`) }}" name="url_site"
+      placeholder="{{@global.gettext(`URL du site`)}}" type="text"></input-text>
+    <input-text label="{{ @global.gettext(`Email`) }}" name="email" placeholder="{{@global.gettext(`Email`)}}"
+      type="text"></input-text>
+    <input-text label="{{ @global.gettext(`Tel`) }}" name="tel" placeholder="{{@global.gettext(`Tel`)}}" type="text">
+    </input-text>
+    <input-text label="{{ @global.gettext(`Organisation`) }}" name="organisation"
+      placeholder="{{@global.gettext(`Organisation`)}}" type="text"></input-text>
+    <!-- <p>{{gettext("Note")}} : --</p> -->
+    <p></p>
+    <div class="base_wr row btn">
+      <button class="ui primary button" on-click="@this.handleClick('SUBMIT',{},@event)">{{submit}}</button>
+      <button class="ui basic button"
+        on-click="@this.handleClick('BACK',{},@event)">{{@global.gettext("ANNULER")}}</button>
+    </div>
+  </form>
+</div>

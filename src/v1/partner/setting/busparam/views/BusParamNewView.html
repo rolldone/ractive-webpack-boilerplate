@@ -1,0 +1,76 @@
+<div id="users" class="base_wr column">
+  <form class="base_wr column ui form" id="form-create">
+    <h3 class="ui dividing header">{{@global.gettext("Formulaire de paramètres commerciaux")}}</h3>
+    <div class="field">
+      <label for="">{{ @global.gettext("Clé") }}</label>
+      <div class="ui left icon input">
+        <i class="user icon"></i>
+        <input type="text" placeholder='{{@global.gettext(`Clé`)}}' name="key" value="">
+      </div>
+      <div class="base_wr row">
+        <span class="base_info error bold small"></span>
+      </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="field">
+      <label for="">{{ @global.gettext("Nom") }}</label>
+      <div class="ui left icon input">
+        <i class="user icon"></i>
+        <input type="text" placeholder='{{@global.gettext(`Nom`)}}' name="value" value="">
+      </div>
+      <div class="base_wr row">
+        <span class="base_info error bold small"></span>
+      </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="field">
+      <label for="">{{ @global.gettext("Description") }}</label>
+      <div class="ui left icon input">
+        <i class="user icon"></i>
+        <input type="text" placeholder='{{@global.gettext(`Description`)}}' name="description" value="">
+      </div>
+      <div class="base_wr row">
+        <span class="base_info error bold small"></span>
+      </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="field">
+      <div class="ui checkbox dom_is_status" id="dom_is_beta_user">
+        <input type="checkbox" name="status" tabindex="0" class="hidden">
+        <label>{{ @global.gettext("Activer les paramètres métier") }}</label>
+      </div>
+      <div class="base_wr row">
+        <span class="base_info error bold small"></span>
+      </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="field">
+      <label for="">{{ @global.gettext("Sélectionner une catégorie de paramètres métier") }}</label>
+      <div class="ui left icon input">
+        <i class="user icon"></i>
+        <div class="ui selection dropdown select-bus-parameter" id="dom_bus_parameter">
+          <input type="hidden" name="bussinee_parameter_category_key">
+          <i class="dropdown icon"></i>
+          <div class="default text">{{@global.gettext("Sélectionnez une catégorie")}}</div>
+          <div class="menu">
+            <div class="item" data-value="" data-symbol="1">--</div>
+            {{#bus_cats:i}}
+            <div class="item" data-key="{{bus_cats[i].key}}" data-value="{{key}}" data-symbol="1">{{bus_cats[i].name}}
+            </div>
+            {{/bus_cats}}
+          </div>
+        </div>
+      </div>
+      <div class="base_wr row">
+        <span class="base_info error bold small"></span>
+      </div>
+    </div>
+    <!-- <p>{{gettext("Note")}} : --</p> -->
+    <p></p>
+    <div class="base_wr row btn">
+      <button class="ui primary button" on-click="@this.handleClick('SUBMIT',{},@event)">{{submit}}</button>
+      <button class="ui basic button"
+        on-click="@this.handleClick('BACK',{},@event)">{{@global.gettext("ANNULER")}}</button>
+    </div>
+  </form>
+</div>

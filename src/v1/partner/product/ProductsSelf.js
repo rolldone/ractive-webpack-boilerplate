@@ -1,6 +1,6 @@
 import Layout from "../Layout";
 import { Products } from "./Products";
-import PlatsHttpRequest from "../services/PlatsHttpRequest";
+import SelfPlatsHttpRequest from "../services/SelfPlatsHttpRequest";
 
 export const ProductsSelf = Products.extend({
 	data : function(){
@@ -12,8 +12,8 @@ export const ProductsSelf = Products.extend({
 	},
 	getDatas : async function(){
 		try {
-			let platsHttp = new PlatsHttpRequest();
-			let resData = await platsHttp.getSelfPlats({});
+			let platsHttp = new SelfPlatsHttpRequest();
+			let resData = await platsHttp.getPlats({});
 			return resData;
 		}catch(ex){
 			console.error('getDatas -> ',ex);
@@ -23,7 +23,7 @@ export const ProductsSelf = Products.extend({
 		window.staticType(id,[Number]);
 		let self = this;
 		try{
-			let platsHttp = new PlatsHttpRequest();
+			let platsHttp = new SelfPlatsHttpRequest();
 			let resData = await platsHttp.deleteSelfPlats([id]);
 			switch(resData.status){
 				case 'error':

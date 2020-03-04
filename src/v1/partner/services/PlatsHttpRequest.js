@@ -2,87 +2,31 @@ import BaseHttpRequest from "./BaseHttpRequest";
 
 let PlatsHttpRequest = function(){
     let self = (new BaseHttpRequest()).extend();
-    self.getSelfPlats = async function(props){
+    self.getPlats = async function(props,url=null){
         window.staticType(props,[Object]);
         try{
-            let url = window.HTTP_REQUEST.PRODUCT_XHR.SELF_PRODUCTS;
-            let resdata = await self.getData(url,{});
-            return resdata;
-        }catch(ex){
-            throw ex;
-        }
-    }
-    self.getSelfPlat = async function(id){
-        window.staticType(id,[Number]);
-        try{
-            let url = window.HTTP_REQUEST.PRODUCT_XHR.SELF_PRODUCT;
+            url = url || window.HTTP_REQUEST.PRODUCT_XHR.PRODUCTS;
             let resdata = await self.getData(url,{
-                id : id
+                category_id : props.category_id,
+                cuisine_id : props.cuisine_id
             });
             return resdata;
         }catch(ex){
             throw ex;
         }
     }
-    self.updateSelfPlat = async function(props){
-        window.staticType(props,[Object]);
+    self.getPlat = async function(id,url){
         try{
-            let url = window.HTTP_REQUEST.PRODUCT_XHR.SELF_UPDATE;
-            let formData = self.objectToFormData(props);
-            let resdata = await self.postData(url,formData);
-            return resdata; 
-        }catch(ex){
-            throw ex;
-        }
-    }
-    self.addSelfPlat = async function(props){
-        window.staticType(props,[Object]);
-        try{
-            let url = window.HTTP_REQUEST.PRODUCT_XHR.SELF_ADD;
-            let formData = self.objectToFormData(props);
-            let resdata = await self.postData(url,formData);
-            return resdata; 
-        }catch(ex){
-            throw ex;
-        }
-    }
-    self.deleteSelfPlats = async function(ids){
-        window.staticType(ids,[Array]);
-        try{
-            let url = window.HTTP_REQUEST.PRODUCT_XHR.SELF_DELETE;
-            let formData = self.objectToFormData({
-                ids : JSON.stringify(ids)
-            })
-            let resdata = await self.postData(url,formData);
-            return resdata
-        }catch(ex){
-            console.error('deleteSelfPlats - ex ',ex);
-            throw ex;
-        }
-    }
-    self.getPlats = async function(whatCategoryId){
-        try{
-            let url = window.HTTP_REQUEST.PRODUCT_XHR.PRODUCTS;
-            let resdata = await self.getData(url,{
-                category_id : whatCategoryId
-            });
-            return resdata;
-        }catch(ex){
-            throw ex;
-        }
-    }
-    self.getPlat = async function(id){
-        try{
-            let url = self.setUrl(window.HTTP_REQUEST.PRODUCT_XHR.VIEW,[{"{id}":id}]);
+            url = url || self.setUrl(window.HTTP_REQUEST.PRODUCT_XHR.VIEW,[{"{id}":id}]);
             let resdata = await self.getData(url);
             return resdata;
         }catch(ex){
             throw ex;
         }
     }
-    self.addPlats = async function(props){
+    self.addPlats = async function(props,url=null){
         try{
-            let url = window.HTTP_REQUEST.PRODUCT_XHR.ADD;
+            url = url || window.HTTP_REQUEST.PRODUCT_XHR.ADD;
             let formData = self.objectToFormData(props);
             let resdata = await self.postData(url,formData);
             return resdata;
@@ -90,9 +34,9 @@ let PlatsHttpRequest = function(){
             console.error('addPlatMenu - ex ',ex);
         }
     }
-    self.updatePlats = async function(props){
+    self.updatePlats = async function(props,url=null){
         try{
-            let url = window.HTTP_REQUEST.PRODUCT_XHR.UPDATE;
+            url = url || window.HTTP_REQUEST.PRODUCT_XHR.UPDATE;
             let formData = self.objectToFormData(props);
             let resdata = await self.postData(url,formData);
             return resdata; 
@@ -100,9 +44,9 @@ let PlatsHttpRequest = function(){
             console.error('updatePlats - ex ',ex);
         }
     }
-    self.deletePlats = async function(ids){
+    self.deletePlats = async function(ids,url=null){
         try{
-            let url = window.HTTP_REQUEST.PRODUCT_XHR.DELETE;
+            url = url || window.HTTP_REQUEST.PRODUCT_XHR.DELETE;
             let formData = self.objectToFormData({
                 ids : JSON.stringify(ids)
             })

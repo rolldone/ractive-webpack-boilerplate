@@ -21,7 +21,7 @@
         <tr>
           <td>{{i+1}}</td>
           <td>
-            <img width="70px" src="{{@this.asset('/storage/cuisine/'+photo)}}" alt="">
+            <img width="70px" src="{{@this.assetApiUrl('/storage/cuisine/'+photo)}}" alt="">
           </td>
           <td>
             <div on-click="@this.handleClick('',{},@event)">

@@ -4,29 +4,30 @@ import InputCheckbox from '@v1/components/input/InputCheckbox.js';
 import InputDropdown from '@v1/components/input/InputDropdown';
 import InputImport from '@v1/components/input/InputImport';
 import template from './views/ProductNewView.html';
-import IngredientList from '@v1/partner/ingredient/helper/IngredientList';
-import IngredientFormDialog from '@v1/partner/ingredient/helper/IngredientFormDialog';
+import IngredientList from '@v1/partner/ingredient/dialog/IngredientList';
+import IngredientFormDialog from '@v1/partner/ingredient/dialog/IngredientFormDialog';
+import CuisinesHttpRequest from '../../services/CuisinesHttpRequest';
+import PlatsHttpRequest from '../../services/PlatsHttpRequest';
 export default BaseRactive.extend({
 	template,
 	components : {
 		"input-text" : InputText,
 		"input-checkbox" : InputCheckbox,
 		"input-dropdown" : InputDropdown,
+		"cuisine-dropdown" : InputDropdown,
 		"input-import" : InputImport,
 		'ingredient-list' : IngredientList,
 		'ingredient-dialog' : IngredientFormDialog
 	},
 	data : function(){
 		return {
-			tabs : [{
-				key : 'FORM',
-				label : gettext("Créer une nouvelle cuisine")
-			}],
 			form_rules : {
 				nom : 'required',
 				category : 'required',
-				ingredient_datas : 'required'
+				ingredient_datas : 'required',
+				cuisine_id : 'required|numeric'
 			},
+			cuisines_datas : [],
 			form_type_select : '',
 			categories : {},
 			bus_param : [],
@@ -81,8 +82,12 @@ export default BaseRactive.extend({
 					photo : props
 				})
 			});
+			self.setCuisines(await self.getCuisines());
 			resolve();
 		})
+	},
+	returnCuisineHttpRequest : function(){
+		return new CuisinesHttpRequest();
 	},
 	returnPlatsHttpRequest : function(){
 		return new PlatsHttpRequest();
@@ -123,6 +128,7 @@ export default BaseRactive.extend({
 				self.dom_consignes.checkbox(configCheck);
 			break;
 			case '.ui.dropdown':
+				self.dropdown_cuisine_id = self.findComponent('cuisine-dropdown');
 				self.ui_dropdown_select_category = $('.ui.dropdown.select-category');
 				self.ui_dropdown_select_type = $('.ui.dropdown.select-type');
 				self.ui_dropdown_select_conseils_de_preparation = $('.ui.dropdown.select-conseils_de_preparation');
@@ -245,15 +251,11 @@ export default BaseRactive.extend({
 		await self.setUpdate('form_data',{
 			ingredient_datas : self.get('ingredient_datas').length > 0 ? JSON.stringify(self.get('ingredient_datas')):null
 		})
-		let formData = self.objectToFormData(self.get('form_data'));
-		let url = window.HTTP_REQUEST.PRODUCT_XHR.ADD;
 		let current_form_rules = self.get('form_rules');
 		self.initSubmitValidation(current_form_rules,async function(){
 			try{
-				console.log('vmdfkvmkfv',self.get('form_data'));
-				return;
 				let httpRequest = self.returnPlatsHttpRequest();
-				let resData = await httpRequest.addSelfPlat(self.get('form_data'));
+				let resData = await httpRequest.addPlats(self.get('form_data'));
 				swalSuccess(gettext("Création réussie"));
 				self.set('form_data',{});
 				$(self.find('#form-create'))[0].reset();
@@ -360,6 +362,27 @@ export default BaseRactive.extend({
 		if(dateTimeString != ""){
 			return moment(dateTimeString,'YYYY-MM-DD HH:mm:ss').format('LLL');
 		}
+	},
+	getCuisines : async function(){
+		try{
+			let httpRequest = this.returnCuisineHttpRequest();
+			let resData = await httpRequest.getCuisines();
+			return resData;
+		}catch(ex){
+			console.error('getCuisines - ex ',ex);
+			return null;
+		}
+	},
+	setCuisines : function(props){
+		let self = this;
+		if(props == null)
+			return;
+		this.dropdown_cuisine_id.setOnChangeListener(function(val,e){
+			self.setUpdate('form_data',{
+				cuisine_id : val.value
+			})
+		})
+		this.set('cuisines_datas',props.return);
 	},
 	on : {
 		setting_key : function(event){

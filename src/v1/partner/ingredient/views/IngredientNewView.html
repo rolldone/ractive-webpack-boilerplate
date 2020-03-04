@@ -1,0 +1,22 @@
+<div id="users" class="base_wr column">
+	<tab-head tabs={{tabs}} active="0"></tab-head>
+	<tab-page ref="FORM">
+	  <form class="base_wr column ui form" id="form-create">
+      <input-text label="{{ @global.gettext('Nom de ingredient') }}" name="nom_de_ingredient"
+        placeholder="{{@global.gettext('Nom de ingredient')}}" type="text"></input-text>
+      <measure-dropdown datas="{{measures_datas}}" other_value_key="value" dropdown_text="name"
+        label="{{ @global.gettext('Unite De Mesure') }}" name="unite_de_mesure"
+        placeholder="{{@global.gettext('Unite De Mesure')}}" class="select-unite_de_mesure"
+        id="unite_de_mesure"></measure-dropdown>
+      <p></p>
+      <div class="base_wr row btn">
+        <button class="ui primary button" on-click="@this.handleClick('SUBMIT',{},@event)">{{submit}}</button>
+        <button class="ui basic button"
+          on-click="@this.handleClick('BACK',{},@event)">{{@global.gettext("ANNULER")}}</button>
+      </div>
+    </form>
+	</tab-page>
+	<tab-page ref="INGREDIENT_STOCK">
+	  <ingredient-stock></ingredient-stock>
+	</tab-page>
+</div>

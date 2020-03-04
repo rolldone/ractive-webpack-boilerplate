@@ -16,7 +16,7 @@ var ListTable = BaseRactive.extend({
   onconfig: function() {
     let self = this;
     self._super();
-    self.root.findComponent("head-menu").setHeader("page_name", '{{_i("Base List Table")}}');
+    self.root.findComponent("head-menu").setHeader("page_name", gettext("Base List Table"));
   },
   onrender: function() {},
   oncomplete: async function() {

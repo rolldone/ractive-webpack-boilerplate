@@ -4,31 +4,50 @@ import InputCheckbox from "../../../components/input/InputCheckbox";
 import InputText from '@v1/components/input/Input';
 import InputDropdown from "../../../components/input/InputDropdown";
 import MenusHeaderHttpRequest from "../../services/MenusHeaderHttpRequest";
+import CuisinesHttpRequest from "../../services/CuisinesHttpRequest";
 
 const MenuNew = BaseRactive.extend({
   template,
   components: {
     "input-checkbox": InputCheckbox,
     "input-text": InputText,
-    "input-dropdown": InputDropdown
+    "input-dropdown": InputDropdown,
+    "cuisine-dropdown" : InputDropdown
   },
   data: function() {
     return {
       form_data: {},
       form_rules: {
-        date: "required"
+        date: "required",
+        cuisine_id : 'required'
       },
       menu_datas: [],
-      submit: gettext("ENREGISTRER")
+      submit: gettext("ENREGISTRER"),
+      cuisines_datas : []
     };
   },
   oncomplete: function() {
     let self = this;
     self._super();
-    self.initCalendar();
+    return new Promise(async (resolve)=>{
+      self.initCalendar();
+      if(hasPermission('menu.add') == true){
+        self.cuisine_dropdown = self.findComponent('cuisine-dropdown');
+        self.cuisine_dropdown.setOnChangeListener((val,e)=>{
+          self.setUpdate('form_data',{
+            cuisine_id : val.value
+          })
+        })
+      }
+      self.setCuisines(await self.getCuisines());
+      resolve();
+    })
   },
   returnNewMenusHeaderHttpRequest: function() {
     return new MenusHeaderHttpRequest();
+  },
+  returnNewCuisinesHttpRequest : function(){
+    return new CuisinesHttpRequest();
   },
   initSubmitValidation: function(form_rule, callback) {
     window.staticType(form_rule, [Object]);
@@ -124,6 +143,12 @@ const MenuNew = BaseRactive.extend({
         case "error":
           return console.error("handleClick - submit - ex", ex);
       }
+      return self.dispatch('menu.view',{
+        state : {
+          ':id' : resData.return.id
+        },
+        noHistory : true
+      })
       window.location.href = self.setUrl(window.HTTP_REQUEST.MENU_HEADER.VIEW, [
         { ":id": resData.return.id }
       ]);
@@ -134,6 +159,24 @@ const MenuNew = BaseRactive.extend({
         ])
       );
     });
+  },
+  getCuisines : async function(){
+    let self = this;
+    try{
+      let httpRequest = self.returnNewCuisinesHttpRequest();
+      let resData = await httpRequest.getCuisines({});
+      return resData;
+    }catch(ex){
+      console.error('getCuisines - ex ',ex);
+      return null;
+    }
+  },
+  setCuisines : function(props){
+    let self = this;
+    if(props == null){
+      return;
+    }
+    self.set('cuisines_datas',props.return);
   }
 });
 

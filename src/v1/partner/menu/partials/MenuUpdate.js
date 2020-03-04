@@ -19,6 +19,7 @@ const MenuUpdate = MenuNew.extend({
       self.setMenuHeader(resData);
       resData = await self.getMenuDatas();
       self.setMenuDatas(resData);
+      resolve();
     });
   },
   getMenuHeader: async function() {
@@ -40,7 +41,11 @@ const MenuUpdate = MenuNew.extend({
     await self.set("form_data", props.return);
     await self.set("old_form_data", props.return);
     console.log("sefl.dateCalendar", self.dateCalendar.daterangepicker);
-    self.dateCalendar.data("daterangepicker").setStartDate(moment(self.get("form_data").date, "YYYY-MM-DD"));
+    setTimeout(()=>{
+      self.dateCalendar.data("daterangepicker").setStartDate(moment(self.get("form_data").date, "YYYY-MM-DD"));
+      self.cuisine_dropdown.setValue(self.get('form_data').cuisine_id+'');
+    },1000)
+    
     console.log("old", self.get("old_form_data"));
     console.log("current", self.get("form_data"));
   },
@@ -54,6 +59,7 @@ const MenuUpdate = MenuNew.extend({
       console.error("getMenuDatas - ex ", ex);
     }
   },
+  
   setMenuDatas: async function(props) {
     let self = this;
     switch (props.action) {

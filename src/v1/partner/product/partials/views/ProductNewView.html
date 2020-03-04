@@ -9,9 +9,12 @@
     <input-import label="{{ @global.gettext('Import') }}" name="photo" placeholder="{{@global.gettext('Import')}}"></input-import>
     <input-text label="{{ @global.gettext('Nom') }}" name="nom" placeholder="{{@global.gettext('Nom')}}" type="text"></input-text>
     <input-dropdown datas="{{type_forms}}" other_value_key="key" dropdown_text="value" label="{{ @global.gettext('Category') }}" name="category" class="select-category" id="category"></input-dropdown>
+    {{#if @global.hasPermission('product.add')}}
+    <cuisine-dropdown datas="{{cuisines_datas}}" other_value_key="id" dropdown_text="nom" label="{{ @global.gettext('Pour les restaurants') }}" name="cuisine_id" class="select-cuisine_id" id="cuisine_id"></cuisine-dropdown>
+    {{/if}}
     {{#if form_type_select == "PLA"}}
     <input-text label="{{ @global.gettext('Description') }}" form_title="{{@global.gettext('DÉTAILS')}}" name="description" placeholder="{{@global.gettext('Description')}}" type="text"></input-text>
-    <input-text label="{{ @global.gettext('Ingrédients') }}" name="ingredients" placeholder="{{@global.gettext('Ingrédients')}}" type="text"></input-text>
+    <!-- <input-text label="{{ @global.gettext('Ingrédients') }}" name="ingredients" placeholder="{{@global.gettext('Ingrédients')}}" type="text"></input-text> -->
     <button on-click="@this.handleClick('SELECT_INGREDIENT',{},@event)">{{@global.gettext("Select Ingredients")}}</button>
     {{>ingredient_list}}
     <input-text label="{{ @global.gettext('Allergènes') }}" name="allergenes" placeholder="{{@global.gettext('Allergènes')}}" type="text"></input-text>
@@ -30,7 +33,7 @@
     <input-text label="{{ @global.gettext('Suggestions vins') }}" name="suggestions_vins" placeholder="{{@global.gettext('Suggestions vins')}}" type="text"></input-text>
     {{elseif form_type_select == "ENT"}}
     <input-text label="{{ @global.gettext('Description') }}" form_title="{{@global.gettext('DÉTAILS')}}" name="description" placeholder="{{@global.gettext('Description')}}" type="text"></input-text>
-    <input-text label="{{ @global.gettext('Ingrédients') }}" name="ingredients" placeholder="{{@global.gettext('Ingrédients')}}" type="text"></input-text>
+    <!-- <input-text label="{{ @global.gettext('Ingrédients') }}" name="ingredients" placeholder="{{@global.gettext('Ingrédients')}}" type="text"></input-text> -->
     <button on-click="@this.handleClick('SELECT_INGREDIENT',{},@event)">{{@global.gettext("Select Ingredients")}}</button>
     {{>ingredient_list}}
     <input-text label="{{ @global.gettext('Allergènes') }}" name="allergenes" placeholder="{{@global.gettext('Allergènes')}}" type="text"></input-text>
@@ -48,7 +51,9 @@
     <input-text label="{{ @global.gettext('Suggestions vins') }}" name="suggestions_vins" placeholder="{{@global.gettext('Suggestions vins')}}" type="text"></input-text>
     {{elseif form_type_select == "DES"}}
     <input-text label="{{ @global.gettext('Description') }}" form_title="{{@global.gettext('DÉTAILS')}}" name="description" placeholder="{{@global.gettext('Description')}}" type="text"></input-text>
-    <input-text label="{{ @global.gettext('Ingrédients') }}" name="ingredients" placeholder="{{@global.gettext('Ingrédients')}}" type="text"></input-text>
+    <!-- <input-text label="{{ @global.gettext('Ingrédients') }}" name="ingredients" placeholder="{{@global.gettext('Ingrédients')}}" type="text"></input-text> -->
+    <button on-click="@this.handleClick('SELECT_INGREDIENT',{},@event)">{{@global.gettext("Select Ingredients")}}</button>
+    {{>ingredient_list}}
     <input-text label="{{ @global.gettext('Accompagnement') }}" name="accompagnement" placeholder="{{@global.gettext('Accompagnement')}}" type="text"></input-text>
     <input-text label="{{ @global.gettext('Înformation supplémentaires') }}" name="information_supplementaires" placeholder="{{@global.gettext('Înformation supplémentaires')}}" type="text"></input-text>
     <input-text label="{{ @global.gettext('Recette') }}" name="recette" placeholder="{{@global.gettext('Recette')}}" type="text"></input-text>

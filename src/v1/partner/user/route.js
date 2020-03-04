@@ -34,4 +34,12 @@ module.exports = function(router){
 		middleware : [],
 		name : 'user.new'
 	})
+
+	router.addRoute('/user/profile',function(){
+		return new Promise((resolve)=>{
+			require.ensure([],()=>resolve(require('./UserProfile').default));
+		})
+	},{
+		name : 'user.profile'
+	})
 }

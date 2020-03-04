@@ -1,0 +1,87 @@
+<div id="users" class="base_wr column" data-state={{update_state}}>
+  <filter-bar on-filterButtonClickListener="observeFilterButtonClickListener"></filter-bar>
+  <!-- <right-btn on-filterButtonClickListener="observeFilterButtonClickListener"></right-btn> -->
+  <table class="ui striped table">
+    <thead>
+      <tr>
+        <th>
+          &nbsp;
+        </th>
+        <th>
+          <a href="#" class="sort-item">
+            {{ @global.gettext("ID") }}
+            <i class="icon caret down"></i>
+          </a>
+        </th>
+        <th>
+          <a href="#" class="sort-item">
+            {{ @global.gettext("Clé") }}
+            <i class="icon caret down"></i>
+          </a>
+        </th>
+        <th>{{ @global.gettext("Nom") }}</th>
+        {{#if @this.categoryGroup(['BOI'],filter.key)==true }}
+        <th>{{ @global.gettext("Description") }}</th>
+        {{/if}}
+        <th>{{ @global.gettext("Statut") }}</th>
+        <th>{{ @global.gettext("Catégorie") }}</th>
+        <th>{{ @global.gettext("Date de création") }}</th>
+        <th>{{ @global.gettext("Option") }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each datas:i}}
+      <tr>
+        <td>
+          <div class="left">
+            <div class="ui checkbox">
+              <input type="checkbox" class="multi_choice" data-id="{{id}}">
+              <label>{{first_name}} {{last_name}}</label>
+            </div>
+        </td>
+        <td>{{id}}</td>
+        <td>
+          <div on-click="@this.handleClick('',{},@event)">
+            <route-link href="{{@this.routeName('setting.bus_param.view',{ state : { ':id' : id } })}}">
+              {{key}}
+            </route-link>
+          </div>
+        </td>
+        <td>{{value}}</td>
+        <td>{{status}}</td>
+        <td>{{bussinee_parameter_category.name}}</td>
+        <td>{{created_at}}</td>
+        <td>
+          <div class="ui grid">
+            <div class="two wide column" on-click="@this.handleClick('',{},@event)">
+              <a class="item nowrap" href="{{@this.setUrl(@global.HTTP_REQUEST.PRODUCT.DUPLICATE,[{':id':id}])}}">
+                <i data-tippy-content="Dupliquer" class="ion ion-md-copy"></i>
+              </a>
+            </div>
+            <div class="two wide column" on-click="@this.handleClick('DELETE_ITEM',{id : id},@event)">
+              <i data-tippy-content="Supprimer" style="color:red; cursor: pointer;" class="ion ion-md-close"></i>
+            </div>
+
+          </div>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  {{#if pagination_numbers.length > 0}}
+  <div>
+    <div class="ui pagination menu" id="pag-data">
+      {{#each (pagination_numbers):i}}
+      {{#if pagination_numbers[0] != 1 && i == 0}}
+      <a class="item" data-value="1"
+        on-click="@this.handleClick('PAGINATION',{page : 1, is_first : true, is_last : false},@event)">1</a>
+      <div class="disabled item">...</div>
+      {{/if}}
+      <a class="item" data-value="{{pagination_numbers[i]}}"
+        on-click="@this.handleClick('PAGINATION',{page : pagination_numbers[i], is_first : i==0, is_last : i==pagination_numbers.length-1},@event)">{{pagination_numbers[i]}}</a>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+</div>

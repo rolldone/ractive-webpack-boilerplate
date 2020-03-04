@@ -5,6 +5,9 @@ export default function(){
     self.getCuisines = async function(props={}){
         try{
             let resdata = await self.getData(window.HTTP_REQUEST.CUISINE_XHR.CUISINES,props);
+            if(resdata.status == 'error'){
+                throw resdata.data.responseJSON;
+            }
             return resdata;
         }catch(ex){
             throw ex;

@@ -4,10 +4,6 @@ import BaseRactive from '../../lib/ractive/BaseRactive';
 let SideMenu = BaseRactive.extend({
   template,
   isolate : true,
-  onconfig : function(){},
-  onrender : function(){
-    // feather.replace()
-  },
   oncomplete : function(){
     var segments = window.location.pathname.split( '/' );
     console.log(segments);

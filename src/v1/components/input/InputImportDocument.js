@@ -1,4 +1,6 @@
 import template from './views/InputImportDocumentView.html';
+import InputImport from './InputImport';
+
 let ImportDocument = InputImport.extend({
   template,
   data : function(){

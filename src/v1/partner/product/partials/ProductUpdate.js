@@ -5,13 +5,6 @@ var ProductUpdate = ProductNew.extend({
 	data : function(){
 		return {
 			submit : 'ENREGISTRER',
-			tabs : [{
-				key : 'FORM',
-				label : gettext("Créer une nouvelle cuisine")
-			},{
-				key : 'CUISINE_USER',
-				label : 'Cuisine Users'
-			}],
 		}
 	},
 	onconfig : function(){
@@ -55,27 +48,25 @@ var ProductUpdate = ProductNew.extend({
 		console.log('async',props);
 		var task = [
 			function(callback){
-				for(var key in form_data){
+				window.eachObject(form_data,function(i,key,val){
 					switch(key){
 						case 'category':
-							var fixKey = key;
 							setTimeout(function(key){
 								self[`ui_dropdown_select_${key}`].dropdown('set selected',form_data[key]+'').dropdown('refresh')
-								callback(null,'vmdfkmkdfvm')
-							}.bind(self,fixKey),1000)
+								callback(null)
+							}.bind(self,key),1000)
 							break;
 						case 'nom':
-							var fixKey = key;
 							setTimeout(function(key){
 								rootDom.find('input[name='+key+']').val(form_data[key]);
-							}.bind(self,fixKey),1000)
+							}.bind(self,key),1000)
 						break;
 					}
-				}
+				})
 			},
 			function(callback){
 				try{
-					for(var key in form_data){
+					window.eachObject(form_data,function(i,key,val){
 						switch(key){
 							case 'category':
 							// Keep blank because is just had set on task before!!
@@ -84,40 +75,57 @@ var ProductUpdate = ProductNew.extend({
 							case 'type':
 							case 'contenance':
 							case 'conditionnement':
-								var fixKey = key;
 								setTimeout(function(key){
 									self[`ui_dropdown_select_${key}`].dropdown('refresh').dropdown('set selected',form_data[key]+'')
-								}.bind(self,fixKey),2000);
+								}.bind(self,key),2000);
 							break;
 							case 'congelation':
 							case 'consignes':
-								var fixKey = key;
-								if(form_data[fixKey] == 1){
+								if(form_data[key] == 1){
 									setTimeout(function(key){
 										self[`dom_${key}`].trigger('click');
-									}.bind(self,fixKey),2000)
+									}.bind(self,key),2000)
 								}
 							break;
+							case 'cuisine_id':
+								if(self.dropdown_cuisine_id != null){
+									return self.dropdown_cuisine_id.setValue(val+'');
+								}
+								break;
+							case 'ingredients':
+								var newIngredientDatas = [];
+								for(var a=0;a<val.length;a++){
+									newIngredientDatas.push({
+										ingredient_id : val[a].pivot.ingredient_id,
+										plats_id : val[a].pivot.plats_id,
+										qty : val[a].pivot.qty,
+										nom_de_ingredient : val[a].nom_de_ingredient,
+										unite_de_mesure : val[a].unite_de_mesure
+									})
+								}
+								self.set('ingredient_datas',newIngredientDatas);
+								break;
 							case 'photo':
-								setTimeout(function(key){
-									let photo = config.API_ASSET_URL+"/storage/plat/" + form_data[key];
-									console.log("POTO ==> ", photo);
-									rootDom.find(`#preview`).attr('src', photo);
-								}.bind(self,key),100);
+								let photo = config.API_ASSET_URL+"/storage/plat/" + val;
+								console.log("POTO ==> ", photo);
+								rootDom.find(`#preview`).attr('src', photo);
 							break;
 							default:
-								var fixKey = key;
-								rootDom.find('input[name='+fixKey+']').val(form_data[fixKey]);
+								rootDom.find('input[name='+key+']').val(val);
 							break;
 						}
-					}  
-					callback(null);
+						if(i == Object.keys(form_data).length - 1){
+							callback(null);
+						}
+					})
 				}catch(ex){
 					callback(null);
 				}
 			},
 			function(callback){
 				self.initTextvalidation();
+				self.ingredientFormList = self.findComponent('ingredient-list');
+				self.ingredientFormList.setDatas(self.get('ingredient_datas'));
 				callback(null);
 			}
 		];
@@ -126,10 +134,13 @@ var ProductUpdate = ProductNew.extend({
 			console.log('res -> ',res);
 		})
 	},
-	submitData : function(){
+	submitData : async function(){
 		let self = this;
 		self.setUpdate('form_data',{
 			id : self.root.get('id')
+		})
+		await self.setUpdate('form_data',{
+			ingredient_datas : self.get('ingredient_datas').length > 0 ? JSON.stringify(self.get('ingredient_datas')):null
 		})
 		console.log('form_data',self.get('form_data'));
 		let formData = self.objectToFormData(self.get('form_data'));

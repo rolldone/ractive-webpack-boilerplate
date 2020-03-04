@@ -12,14 +12,9 @@ var BaseRactive = Ractive.extend({
       pagination_numbers: []
     };
   },
-  onconfig: function() {
-    let self = this;
-    self._super();
-    self.reInitializeObserve();
-  },
-  oncomplete: function() {
-    let self = this;
-    self._super();
+  onconstruct : function(){
+    this._super();
+    this.reInitializeObserve();
   },
   reInitializeObserve: function() {
     let self = this;
@@ -515,8 +510,12 @@ var BaseRactive = Ractive.extend({
     }
     return config.BASE_PATH + stringUrl;
   },
-  asset: function(stringUrl) {
+  staticAsset: function(stringUrl) {
     window.staticType(stringUrl, [String]);
+    return config.ASSET + stringUrl;
+  },
+  assetApiUrl : function(stringUrl){
+    window.staticType(stringUrl,[String]);
     return config.API_ASSET_URL + stringUrl;
   },
   dispatch: function(stringUrlOrName, props = null) {
@@ -534,8 +533,18 @@ var BaseRactive = Ractive.extend({
       noHistory: false
     });
   },
-  routeName: function(whatRouteName) {
+  routeName: function(whatRouteName,props=null) {
+    if(props != null){
+      var whattheUrl = window.router.routeName(whatRouteName)
+      if (props.state != null) whattheUrl = this.setUrl(whattheUrl, [props.state]);
+      if (props.query != null) whattheUrl = this.jsonToQueryUrl(whattheUrl, props.query, null);
+      if (props.hash != null) whattheUrl = this.jsonToQueryUrl(whattheUrl, props.hash, "hash");
+      return whattheUrl;
+    }
     return window.router.routeName(whatRouteName);
+  },
+  getConfig : function(){
+    return config;
   },
   newOn: {}
 });

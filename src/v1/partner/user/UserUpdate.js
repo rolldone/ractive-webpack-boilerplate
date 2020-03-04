@@ -2,7 +2,7 @@ import Layout from "../Layout";
 import { UserNew } from "./UserNew";
 import UserHttpRequest from "../services/UserHttpRequest";
 
-var BodyContent = UserNew.extend({
+export const UserUpdate = UserNew.extend({
     data : function(){
         return {
             title_form : "Mettre à jour un utilisateur",
@@ -88,5 +88,5 @@ var BodyContent = UserNew.extend({
 })
 
 export default Layout({
-	BodyContent
+	BodyContent : UserUpdate
 })

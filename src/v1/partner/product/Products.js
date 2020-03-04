@@ -220,7 +220,7 @@ export const Products = ListTable.extend({
         console.error('deleteItem -> ',ex);
       }
     },
-    on : {
+    newOn : {
       observeFilterButtonClickListener : function(c,text,object){
         let self = this;
         switch(text){

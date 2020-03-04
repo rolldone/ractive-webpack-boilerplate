@@ -6,17 +6,17 @@ import ProductCuisine from "./partials/ProductCuisine";
 export const ProductTabUpdate = ProductTabNew.extend({
 	components : {
 		"product-new" : ProductUpdate,
-		"product-cuisine" : ProductCuisine
+		// "product-cuisine" : ProductCuisine
 	},
 	data : function(){
 		return {
 			tabs : [{
 				key : 'FORM',
 				label : gettext("Créer une nouvelle plat")
-			},{
+			},/* {
 				key : 'PRODUCT_CUISINES',
 				label : gettext("Plats Cuisines")
-			}],
+			} */],
 			form_rules : {
 				nom : 'required',
 				category : 'required',

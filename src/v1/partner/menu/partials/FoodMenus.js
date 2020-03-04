@@ -4,8 +4,9 @@ import StockHistories from './StockHistories';
 import InputDropdown from '@v1/components/input/InputDropdown';
 import InputText from '@v1/components/input/Input';
 import InputCheckbox from '@v1/components/input/InputCheckbox';
-import PlatsHttpRequest from '../../services/PlatsHttpRequest';
 import MenuHttpRequest from '../../services/MenusHttpRequest';
+import SelfPlatsHttpRequest from '../../services/SelfPlatsHttpRequest';
+import PlatsHttpRequest from '../../services/PlatsHttpRequest';
 
 const FoodMenus = BaseRactive.extend({
   template,
@@ -19,6 +20,7 @@ const FoodMenus = BaseRactive.extend({
     return {
       title: "",
       menu_header_id: null,
+      cuisine_id : null,
       bus_param_id: null,
       form_update_rules: {
         initial_value: "required|numeric",
@@ -47,6 +49,10 @@ const FoodMenus = BaseRactive.extend({
     let self = this;
 		self._super();
 		return new Promise(async function(){
+      /* 
+        Get Plats Menu Sesuai dengan cuisine nya, Untuk khusus Self
+        Cuisine id di dapatkan otmatis dari requestnya
+      */
 			let resData = await self.getPlatsMenuByBussineParamId();
 			self.setPlatsMenu(resData);
 			self.selectDropdown = self.findComponent("input-dropdown");
@@ -56,7 +62,10 @@ const FoodMenus = BaseRactive.extend({
 				self.setUpdate("form_data", {
 					plats_id: props.value
 				});
-			});
+      });
+      /* 
+        Get Data yang telah di simpan sebelumnya
+      */
 			resData = await self.getMenus();
 			self.setMenus(resData);
 			self.stockHistories = self.findComponent("stock-histories");
@@ -140,7 +149,10 @@ const FoodMenus = BaseRactive.extend({
     if (bus_param_id == null) return null;
     try {
       let platsMenuHttpRequest = new PlatsHttpRequest();
-      let resData = await platsMenuHttpRequest.getPlats(bus_param_id);
+      let resData = await platsMenuHttpRequest.getPlats({
+        category_id : bus_param_id,
+        cuisine_id : self.get('cuisine_id') || null
+      });
       return resData;
     } catch (ex) {
       console.error("getMenusByCategory - ex ", ex);

@@ -56,6 +56,10 @@ export default function() {
           DUPLICATE: route["api.member.menu.menu_header.duplicate"]
         },
         MENU_XHR: {
+          SELF_VIEW : route['api.member.menu.self.view'],
+          SELF_MENUS : route['api.member.menu.self.menus'],
+          SELF_DELETE : route['api.member.menu.self.delete'],
+          SELF_UPDATE : route['api.member.menu.self.update'],
           MENUS: route["api.member.menu.menus"],
           VIEW: route["api.member.menu.view"],
           ADD: route["api.member.menu.add"],

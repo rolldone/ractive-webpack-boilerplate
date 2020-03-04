@@ -1,12 +1,16 @@
 import Layout from "../Layout";
 import { Menus } from "./Menus";
+import SelfMenusHeaderHttpRequest from "../services/SelfMenusHeaderHttpRequest";
 
 export const MenusSelf = Menus.extend({
+  returnNewMenusHeader : function(){
+    return new SelfMenusHeaderHttpRequest()
+  },
   getDatas: async function() {
     let self = this;
     try {
       let platMenuHttp = self.returnNewMenusHeader();
-      let resdata = await platMenuHttp.getSelfMenusHeaders({});
+      let resdata = await platMenuHttp.getMenusHeaders({});
       console.log("resdata", resdata);
       return resdata;
     } catch (ex) {
@@ -18,7 +22,7 @@ export const MenusSelf = Menus.extend({
     window.staticType(id, [Number]);
     try {
       var menuHeaderHttp = self.returnNewMenusHeader();
-      var resData = await menuHeaderHttp.deleteSelfMenusHeader([id]);
+      var resData = await menuHeaderHttp.deleteMenuHeader([id]);
       swalSuccess("Success", resData.return);
       self.oncomplete();
     } catch (ex) {
@@ -30,7 +34,7 @@ export const MenusSelf = Menus.extend({
     let self = this;
     try {
       let menuHeaderHttp = self.returnNewMenusHeader();
-      var resData = await menuHeaderHttp.duplicateSelfMenusHeader(id);
+      var resData = await menuHeaderHttp.duplicateMenusHeader(id);
       alert('vmdfkvm');
       if (resData.status == "error") throw resData;
       self.dispatch('menu.view',{

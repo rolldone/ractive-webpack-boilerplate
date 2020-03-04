@@ -50,6 +50,17 @@ var PrivilegeHttpRequest = function(){
             throw ex;
         }
     }
+    self.getPrivilege = async function(id){
+        try{
+            let url = self.setUrl(window.HTTP_REQUEST.PRIVILEGE_XHR.VIEW,[{"{id}": id }]);
+            let resData = await self.getData(url,{});
+            if(resData.status == 'error')
+                throw resData.data.responseJSON;
+            return resData;
+        }catch(ex){
+            throw ex;
+        }
+    }
     self.getPrivilegeItems = async function(){
         try{
             let url = window.HTTP_REQUEST.PRIVILEGE_XHR.PRIVILEGE_ITEMS;

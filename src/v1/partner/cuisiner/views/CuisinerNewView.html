@@ -1,0 +1,17 @@
+<div id="users" class="base_wr column">
+  <form class="base_wr column ui form" id="form-create">
+   <import-document label="{{ @global.gettext(`CV`) }}" name="photo" placeholder="{{@global.gettext(`CV`)}}"></import-document>
+   <input-text label="{{ @global.gettext(`Nom`) }}" name="nom" placeholder="{{@global.gettext(`Nom`)}}" type="text"></input-text>
+   <input-text label="{{ @global.gettext(`Prenom`) }}" name="prenom" placeholder="{{@global.gettext(`Prenom`)}}" type="text"></input-text>
+   <input-text label="{{ @global.gettext(`Email`) }}" name="email" placeholder="{{@global.gettext(`Email`)}}" type="email"></input-text>
+   <input-text label="{{ @global.gettext(`Numéro de téléphone`) }}" name="phone_number" placeholder="{{@global.gettext(`Numéro de téléphone`)}}" type="text"></input-text>
+   <input-dropdown datas="{{status_datas}}" other_value_key="id" dropdown_text="text" label="{{ @global.gettext(`Statut`) }}" name="status" placeholder="{{@global.gettext(`Statut`)}}" class="select-status" id="status"></input-dropdown>
+   <!-- <p>{{gettext("Note")}} : --</p> -->
+   <input-search-dropdown style="width: 100%" datas="{{cuisines_datas}}" other_value_key="id" dropdown_text="nom" label="{{ @global.gettext(`Recherche cuisine`) }}" name="cuisinies_id" placeholder="{{@global.gettext(`Recherche cuisine`)}}" class="select-cuisinies_id" id="cuisinies_id"></input-search-dropdown>
+   <p></p>
+   <div class="base_wr row btn">
+     <button class="ui primary button" on-click="@this.handleClick('SUBMIT',{},@event)">{{submit}}</button>
+     <button class="ui basic button" on-click="@this.handleClick('BACK',{},@event)">{{@global.gettext("ANNULER")}}</button>
+   </div>
+ </form>
+</div>
